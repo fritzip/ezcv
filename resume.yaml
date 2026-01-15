@@ -1,0 +1,147 @@
+basics:
+  name: "Maxime Doe"
+  label: "Senior Software Architect"
+  image: "https://i.pravatar.cc/300"
+  email: "maxime.doe@example.com"
+  phone: "+1 (555) 019-2834"
+  url: "https://maximedoe.dev"
+  summary: "Results-oriented Senior Software Architect with over 10 years of experience designing and implementing scalable, high-performance web applications. Proven track record of leading cross-functional teams, mentoring junior developers, and optimizing development workflows. Expert in modern JavaScript ecosystems, cloud infrastructure, and microservices architecture. Dedicated to writing clean, maintainable code and solving complex engineering challenges."
+  location:
+    city: "San Francisco"
+    country: "CA, USA"
+  profiles:
+    - network: "GitHub"
+      username: "maximedoe"
+      url: "https://github.com/maximedoe"
+    - network: "LinkedIn"
+      username: "maximedoe"
+      url: "https://linkedin.com/in/maximedoe"
+    - network: "Twitter"
+      username: "@maxcodes"
+      url: "https://twitter.com/maxcodes"
+
+skills:
+  - name: "Frontend"
+    keywords:
+      - name: "React / Next.js"
+        level: 5
+      - name: "TypeScript"
+        level: 5
+      - name: "Tailwind CSS"
+        level: 4
+      - name: "WebAssembly"
+        level: 3
+  - name: "Backend"
+    keywords:
+      - name: "Node.js"
+        level: 5
+      - name: "Python (FastAPI)"
+        level: 4
+      - name: "PostgreSQL"
+        level: 4
+      - name: "GraphQL"
+        level: 4
+  - name: "DevOps"
+    keywords:
+      - name: "AWS"
+        level: 4
+      - name: "Docker/K8s"
+        level: 3
+      - name: "Terraform"
+        level: 3
+
+work:
+  - name: "Global Tech Solutions"
+    position: "Lead Software Architect"
+    url: "https://globaltech.example.com"
+    startDate: "2022-03"
+    endDate: "Present"
+    summary: "Spearheading the migration of legacy monolithic systems to a cloud-native microservices architecture, improving system reliability and scalability."
+    highlights:
+      - "Designed and implemented a domain-driven architecture that reduced service coupling by 60%."
+      - "Led a team of 15 engineers, establishing code review standards and automated testing protocols that increased code coverage from 40% to 90%."
+      - "Optimized cloud infrastructure costs, resulting in a 25% monthly saving on AWS."
+      - "Introduced internal developer tooling that reduced onboarding time for new hires by 50%."
+      - "Implemented a comprehensive analytics dashboard allowing stakeholders to visualize key performance metrics."
+      - "Refactored the core payment processing module, reducing transaction failures by 15%."
+      
+  - name: "Creative Startups Inc."
+    position: "Senior Full Stack Engineer"
+    url: "https://creativestartups.io"
+    startDate: "2018-06"
+    endDate: "2022-02"
+    summary: "Key contributor to the flagship SaaS product, taking it from MVP to Series B funding."
+    highlights:
+      - "Developed a real-time collaboration feature using WebSockets and Redis."
+      - "Mentored 4 junior developers who were subsequently promoted to mid-level roles."
+      - "Collaborated closely with designers to ensure faithful implementation of Figma prototypes."
+
+  - name: "WebFlow Agency"
+    position: "Frontend Developer"
+    startDate: "2016-01"
+    endDate: "2018-05"
+    summary: "Developed responsive, pixel-perfect websites for high-profile clients."
+    highlights:
+      - "Built over 20 custom WordPress themes and plugins."
+      - "Optimized frontend performance, achieving 95+ Google Lighthouse scores."
+
+  - name: "Freelance"
+    position: "Junior Web Developer"
+    startDate: "2014-06"
+    endDate: "2015-12"
+    summary: "Provided web development services to local businesses."
+    highlights:
+      - "Delivered 15+ projects on time and within budget."
+
+education:
+  - institution: "University of Technology"
+    area: "Computer Science"
+    studyType: "Master of Science"
+    startDate: "2017-09"
+    endDate: "2019-06"
+    score: "Magna Cum Laude"
+    
+  - institution: "State College"
+    area: "Information Systems"
+    studyType: "Bachelor of Science"
+    startDate: "2013-09"
+    endDate: "2017-06"
+
+awards:
+  - title: "Employee of the Year"
+    date: "2023"
+    awarder: "Global Tech Solutions"
+    summary: "Recognized for outstanding leadership."
+
+certificates:
+  - name: "AWS Certified Solutions Architect"
+    date: "2023-08"
+    issuer: "Amazon AWS"
+  - name: "Certified Kubernetes Administrator"
+    date: "2022-11"
+    issuer: "CNCF"
+
+languages:
+  - language: "English"
+    fluency: "Native"
+  - language: "French"
+    fluency: "Fluent"
+  - language: "Spanish"
+    fluency: "Conversational"
+
+interests:
+  - name: "Open Source"
+  - name: "Hiking"
+  - name: "Photography"
+
+publications:
+  - name: "Microservices Patterns in Practice"
+    publisher: "Tech Daily"
+    releaseDate: "2024-01"
+    url: "https://medium.com/@maximedoe/microservices"
+    summary: "A deep dive into real-world implementation challenges of distributed systems."
+  - name: "Scaling Node.js Applications"
+    publisher: "Node Weekly"
+    releaseDate: "2022-11"
+    url: "https://nodeweekly.com/issues/42"
+    summary: "Best practices for handling high-concurrency workloads."

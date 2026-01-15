@@ -1,0 +1,17 @@
+{
+  "name": "static-web-cv",
+  "version": "1.0.0",
+  "description": "Static CV generator with PDF support",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js",
+    "serve": "npx serve public"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

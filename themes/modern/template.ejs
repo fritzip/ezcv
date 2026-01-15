@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= resume.basics.name %> - Resume</title>
+    <!-- Use Configured Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons (Feather Icons via CDN for simplicity or FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Inject Config Styles -->
+    <style>
+        :root {
+            <% if (config.style.primaryColor) { %> --primary-color: <%= config.style.primaryColor %>; <% } %>
+            <% if (config.style.secondaryColor) { %> --secondary-color: <%= config.style.secondaryColor %>; <% } %>
+            <% if (config.style.pagePadding) { %> --page-padding: <%= config.style.pagePadding %>; <% } %>
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" class="pdf-btn" onclick="window.print(); return false;">
+        <i class="fas fa-file-pdf"></i> Save as PDF
+    </a>
+
+    <div class="sheet">
+        <div class="resume-container">
+            
+            <!-- LEFT COLUMN: Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-wrapper">
+                <% if (config.features.showPhoto && resume.basics.image) { %>
+                    <img src="<%= resume.basics.image %>" alt="<%= resume.basics.name %>" class="avatar">
+                <% } %>
+
+                <section>
+                    <h2><span class="icon-box"><i class="fas fa-address-card"></i></span> Contact</h2>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <a href="mailto:<%= resume.basics.email %>"><%= resume.basics.email %></a>
+                    </div>
+
+                    <% if (resume.basics.phone) { %>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <%= resume.basics.phone %>
+                    </div>
+                    <% } %>
+
+                    <% if (resume.basics.url) { %>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-globe"></i></div>
+                        <a href="<%= resume.basics.url %>" target="_blank"><%= resume.basics.url.replace(/^https?:\/\//, '') %></a>
+                    </div>
+                    <% } %>
+
+                    <% if (resume.basics.location) { %>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <%= resume.basics.location.city %>, <%= resume.basics.location.country %>
+                    </div>
+                    <% } %>
+                </section>
+
+                <% if (resume.skills && resume.skills.length) { %>
+                <section>
+                    <h2><span class="icon-box"><i class="fas fa-code"></i></span> Skills</h2>
+                    <% resume.skills.forEach(function(skillGroup) { %>
+                        <div class="skill-group">
+                            <div class="skill-name">
+                                <span><%= skillGroup.name %></span>
+                            </div>
+                            <div>
+                                <% skillGroup.keywords.forEach(function(keyword) { %>
+                                    <% 
+                                        // Handle both object {name: 'React', level: 5} and string 'React'
+                                        var kName = typeof keyword === 'object' ? keyword.name : keyword;
+                                        var kLevel = typeof keyword === 'object' ? keyword.level : 0;
+                                    %>
+                                    
+                                    <% if (kLevel > 0 && config.features.showSkillBars) { %>
+                                        <!-- Per Tag Rating Layout -->
+                                        <div class="skill-line">
+                                            <span><%= kName %></span>
+                                            <div class="skill-bar" title="<%= kLevel %>/5">
+                                                <% var pct = Math.min(Math.max(kLevel, 0), 5) * 20; %>
+                                                <div class="skill-bar-fill" style="width: <%= pct %>%;"></div>
+                                            </div>
+                                        </div>
+                                    <% } else { %>
+                                        <!-- Simple Tag Layout -->
+                                        <span class="skill-tag"><%= kName %></span>
+                                    <% } %>
+
+                                <% }); %>
+                            </div>
+                        </div>
+                    <% }); %>
+                </section>
+                <% } %>
+
+                <% if (resume.basics.profiles && resume.basics.profiles.length) { %>
+                <section>
+                    <h2><span class="icon-box"><i class="fas fa-share-alt"></i></span> Social</h2>
+                    <% resume.basics.profiles.forEach(function(profile) { %>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <% if (profile.network.toLowerCase() === 'github') { %> <i class="fab fa-github"></i>
+                                <% } else if (profile.network.toLowerCase() === 'linkedin') { %> <i class="fab fa-linkedin"></i>
+                                <% } else if (profile.network.toLowerCase() === 'twitter') { %> <i class="fab fa-twitter"></i>
+                                <% } else { %> <i class="fas fa-link"></i> <% } %>
+                            </div>
+                            <a href="<%= profile.url %>" target="_blank"><%= profile.username %></a>
+                        </div>
+                    <% }); %>
+                </section>
+                <% } %>
+
+                <% if (resume.languages && resume.languages.length) { %>
+                <section>
+                    <h2><span class="icon-box"><i class="fas fa-language"></i></span> Languages</h2>
+                    <% resume.languages.forEach(function(lang) { %>
+                        <div class="contact-item" style="display:block; margin-bottom:8px;">
+                            <strong><%= lang.language %></strong>
+                            <div style="font-size:0.8em; color:var(--text-light)"><%= lang.fluency %></div>
+                        </div>
+                    <% }); %>
+                </section>
+                <% } %>
+                
+                <% if (resume.interests && resume.interests.length) { %>
+                <section>
+                    <h2><span class="icon-box"><i class="fas fa-heart"></i></span> Interests</h2>
+                    <% resume.interests.forEach(function(int) { %>
+                        <div class="skill-tag"><%= int.name %></div>
+                    <% }); %>
+                </section>
+                <% } %>
+                </div> <!-- End .sidebar-wrapper -->
+            </aside>
+
+            <!-- RIGHT COLUMN: Main Content -->
+            <main class="main-content">
+                <div class="content-wrapper">
+                <header style="margin-bottom: 30px;">
+                    <h1 style="font-size: 2.5rem; line-height: 1.1;"><%= resume.basics.name %></h1>
+                    <div style="font-size: 1.2rem; color: var(--accent-color); margin-top: 5px; font-weight: 500;">
+                        <%= resume.basics.label %>
+                    </div>
+                    <% if (resume.basics.summary) { %>
+                        <p class="summary" style="margin-top: 15px;">
+                            <%= resume.basics.summary %>
+                        </p>
+                    <% } %>
+                </header>
+
+                <hr style="border: 0; border-bottom: 2px solid #e2e8f0; margin-bottom: 20px;">
+
+                <% if (resume.work && resume.work.length) { %>
+                <section>
+                    <h2><span class="icon-box"><i class="fas fa-briefcase"></i></span> Experience</h2>
+                    <% resume.work.forEach(function(job) { %>
+                        <div class="entry">
+                            <div class="entry-header">
+                                <h3 class="entry-title"><%= job.position %></h3>
+                                <div class="entry-date">
+                                    <%= job.startDate %> — <%= job.endDate %>
+                                </div>
+                            </div>
+                            <div class="entry-subtitle">
+                                <%= job.name %>
+                                <% if (job.url) { %> 
+                                    <a href="<%= job.url %>" target="_blank" style="color: var(--text-light); opacity: 0.7; font-size: 0.8em;"><i class="fas fa-external-link-alt"></i></a> 
+                                <% } %>
+                            </div>
+                            
+                            <% if (job.summary) { %>
+                                <p class="entry-description"><%= job.summary %></p>
+                            <% } %>
+
+                            <% if (job.highlights && job.highlights.length) { %>
+                                <ul style="margin-top: 4px;">
+                                <% job.highlights.forEach(function(highlight) { %>
+                                    <li><%= highlight %></li>
+                                <% }); %>
+                                </ul>
+                            <% } %>
+                        </div>
+                    <% }); %>
+                </section>
+                <% } %>
+
+                <% if (resume.projects && resume.projects.length) { %>
+                <section>
+                    <h2><span class="icon-box"><i class="fas fa-laptop-code"></i></span> Projects</h2>
+                    <% resume.projects.forEach(function(project) { %>
+                        <div class="entry">
+                            <div class="entry-header">
+                                <h3 class="entry-title"><%= project.name %></h3>
+                                <% if (project.url) { %>
+                                    <div class="entry-date" style="color:var(--accent-color)"> 
+                                        <a href="<%= project.url %>" target="_blank"><i class="fas fa-link"></i> Link</a>
+                                    </div>
+                                <% } %>
+                            </div>
+                            <p class="entry-description"><%= project.description %></p>
+                            <% if (project.keywords && project.keywords.length) { %>
+                                <div class="tag-line">
+                                    STACK: <%= project.keywords.join(' · ') %>
+                                </div>
+                            <% } %>
+                        </div>
+                    <% }); %>
+                </section>
+                <% } %>
+
+                <% if (resume.education && resume.education.length) { %>
+                <section>
+                    <h2><span class="icon-box"><i class="fas fa-graduation-cap"></i></span> Education</h2>
+                    <% resume.education.forEach(function(edu) { %>
+                        <div class="entry">
+                            <div class="entry-header">
+                                <h3 class="entry-title"><%= edu.studyType %> in <%= edu.area %></h3>
+                                <div class="entry-date">
+                                    <%= edu.startDate %> — <%= edu.endDate %>
+                                </div>
+                            </div>
+                            <div class="entry-subtitle">
+                                <%= edu.institution %>
+                            </div>
+                            <% if (edu.score) { %>
+                                <div class="entry-description" style="font-size: 0.85em; color: var(--text-light); margin-top: 2px;"><%= edu.score %></div>
+                            <% } %>
+                        </div>
+                    <% }); %>
+                </section>
+                <% } %>
+
+                <% if (resume.certificates && resume.certificates.length) { %>
+                <section>
+                    <h2><span class="icon-box"><i class="fas fa-certificate"></i></span> Certifications</h2>
+                    <% resume.certificates.forEach(function(cert) { %>
+                        <div class="entry">
+                            <div class="entry-header">
+                                <h3 class="entry-title"><%= cert.name %></h3>
+                                <div class="entry-date"><%= cert.date %></div>
+                            </div>
+                            <div class="entry-subtitle"><%= cert.issuer %></div>
+                        </div>
+                    <% }); %>
+                </section>
+                <% } %>
+
+                <% if (resume.awards && resume.awards.length) { %>
+                <section>
+                    <h2><span class="icon-box"><i class="fas fa-trophy"></i></span> Awards</h2>
+                    <% resume.awards.forEach(function(award) { %>
+                        <div class="entry">
+                            <div class="entry-header">
+                                <h3 class="entry-title"><%= award.title %></h3>
+                                <div class="entry-date"><%= award.date %></div>
+                            </div>
+                            <div class="entry-description"><%= award.summary %> — <span style="font-style:italic"><%= award.awarder %></span></div>
+                        </div>
+                    <% }); %>
+                </section>
+                <% } %>
+
+                <% if (resume.publications && resume.publications.length) { %>
+                <section>
+                    <h2><span class="icon-box"><i class="fas fa-book-open"></i></span> Publications</h2>
+                    <% resume.publications.forEach(function(pub) { %>
+                        <div class="entry">
+                            <div class="entry-header">
+                                <h3 class="entry-title"><%= pub.name %></h3>
+                                <div class="entry-date">
+                                    <%= pub.releaseDate %>
+                                </div>
+                            </div>
+                            <div class="entry-subtitle">    
+                                Published by <%= pub.publisher %>
+                                <% if (pub.url) { %> 
+                                    <a href="<%= pub.url %>" target="_blank" style="margin-left:6px; color: var(--text-light); opacity: 0.7; font-size: 0.85rem;"><i class="fas fa-external-link-alt"></i></a> 
+                                <% } %>
+                            </div>
+                            <p class="entry-description"><%= pub.summary %></p>
+                        </div>
+                    <% }); %>
+                </section>
+                <% } %>
+
+                <section>
+                    <h2><span class="icon-box"><i class="fas fa-check-circle"></i></span> Reference</h2>
+                    <p style="color: var(--text-light); font-style: italic;">References available upon request.</p>
+                </section>
+                </div> <!-- End .content-wrapper -->
+            </main>
+        </div>
+    </div>
+
+</body>
+</html>

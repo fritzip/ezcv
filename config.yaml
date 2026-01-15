@@ -1,0 +1,15 @@
+theme: "modern"
+
+# Visual overrides that themes can use
+style:
+  primaryColor: "#1e3a8a" # Deep Blue
+  secondaryColor: "#64748b"
+  accentColor: "#3b82f6"
+  baseFontSize: "10pt"
+  pagePadding: "8mm" # Reduced from original 12mm
+
+# Toggles
+features:
+  showPhoto: true
+  showIcons: true
+  showSkillBars: true
