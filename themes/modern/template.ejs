@@ -85,19 +85,9 @@
                                         var kLevel = typeof keyword === 'object' ? keyword.level : 0;
                                     %>
                                     
-                                    <% if (kLevel > 0 && config.features.showSkillBars) { %>
-                                        <!-- Per Tag Rating Layout -->
-                                        <div class="skill-line">
-                                            <span><%= kName %></span>
-                                            <div class="skill-bar" title="<%= kLevel %>/5">
-                                                <% var pct = Math.min(Math.max(kLevel, 0), 5) * 20; %>
-                                                <div class="skill-bar-fill" style="width: <%= pct %>%;"></div>
-                                            </div>
-                                        </div>
-                                    <% } else { %>
-                                        <!-- Simple Tag Layout -->
-                                        <span class="skill-tag"><%= kName %></span>
-                                    <% } %>
+                                    <span class="skill-tag <%= kLevel > 0 ? 'rated' : '' %>" style="--rating: <%= kLevel %>">
+                                        <%= kName %>
+                                    </span>
 
                                 <% }); %>
                             </div>
@@ -114,7 +104,12 @@
                             <div class="contact-icon">
                                 <% if (profile.network.toLowerCase() === 'github') { %> <i class="fab fa-github"></i>
                                 <% } else if (profile.network.toLowerCase() === 'linkedin') { %> <i class="fab fa-linkedin"></i>
-                                <% } else if (profile.network.toLowerCase() === 'twitter') { %> <i class="fab fa-twitter"></i>
+                                <% } else if (profile.network.toLowerCase() === 'twitter' || profile.network.toLowerCase() === 'x') { %> <i class="fab fa-twitter"></i>
+                                <% } else if (profile.network.toLowerCase() === 'facebook') { %> <i class="fab fa-facebook"></i>
+                                <% } else if (profile.network.toLowerCase() === 'instagram') { %> <i class="fab fa-instagram"></i>
+                                <% } else if (profile.network.toLowerCase() === 'stackoverflow') { %> <i class="fab fa-stack-overflow"></i>
+                                <% } else if (profile.network.toLowerCase() === 'gitlab') { %> <i class="fab fa-gitlab"></i>
+                                <% } else if (profile.network.toLowerCase() === 'bitbucket') { %> <i class="fab fa-bitbucket"></i>
                                 <% } else { %> <i class="fas fa-link"></i> <% } %>
                             </div>
                             <a href="<%= profile.url %>" target="_blank"><%= profile.username %></a>
@@ -192,9 +187,10 @@
                                 <div class="entry-left-col">
                                     <h3 class="entry-title"><%= job.position %></h3>
                                     <div class="entry-subtitle">
-                                        <span class="company-name"><%= job.name %></span>
                                         <% if (job.url) { %> 
-                                            <a href="<%= job.url %>" target="_blank" class="company-url" title="<%= job.url %>"><i class="fas fa-external-link-alt"></i></a> 
+                                            <a href="<%= job.url %>" target="_blank" class="company-name" title="<%= job.url %>"><%= job.name %> <i class="fas fa-external-link-alt" style="font-size: 0.8em; margin-left: 4px;"></i></a> 
+                                        <% } else { %>
+                                            <span class="company-name"><%= job.name %></span>
                                         <% } %>
                                     </div>
                                 </div>
@@ -322,12 +318,13 @@
                         <div class="entry">
                             <div class="entry-header">
                                 <div class="entry-left-col">
-                                    <h3 class="entry-title"><%= pub.name %></h3>
+                                    <% if (pub.url) { %> 
+                                        <a href="<%= pub.url %>" target="_blank" class="entry-title" title="<%= pub.url %>"><%= pub.name %> <i class="fas fa-external-link-alt" style="font-size: 0.8em; margin-left: 4px;"></i></a> 
+                                    <% } else { %>
+                                        <h3 class="entry-title"><%= pub.name %></h3>
+                                    <% } %>
                                     <div class="entry-subtitle">    
-                                        Published by <span class="company-name"><%= pub.publisher %></span>
-                                        <% if (pub.url) { %> 
-                                            <a href="<%= pub.url %>" target="_blank" class="company-url"><i class="fas fa-external-link-alt"></i></a> 
-                                        <% } %>
+                                        <span class="company-name"><%= pub.publisher %></span>
                                     </div>
                                     <p class="entry-description"><%= pub.summary %></p>
                                 </div>

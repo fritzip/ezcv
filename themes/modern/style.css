@@ -305,16 +305,33 @@ a {
 }
 
 .skill-tag {
-  /* Fallback for unrated skills */
   display: inline-block;
   background: #f1f5f9;
-  border: none;
+  border: 1px solid #e2e8f0;
   padding: 4px 10px;
-  border-radius: 12px; /* Pill shape */
+  border-radius: 4px; /* More squared for tech look, better for bar */
   font-size: 0.75rem;
   margin: 3px 3px 3px 0;
   color: var(--text-color);
   font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.skill-tag.rated {
+  padding-bottom: 6px; /* Space for the bar */
+}
+
+.skill-tag.rated::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background-color: var(--accent-color);
+  width: calc(var(--rating) * 20%);
+  opacity: 0.8;
 }
 
 /* Sections */
