@@ -55,7 +55,14 @@ try {
   console.log("💾 Writing files to public/ ...");
   fs.writeFileSync(OUTPUT_HTML, html);
 
-  // Copy CSS
+  // Copy Base CSS if it exists
+  const BASE_CSS = path.join(__dirname, "themes", "base.css");
+  const OUTPUT_BASE_CSS = path.join(OUTPUT_DIR, "base.css");
+  if (fs.existsSync(BASE_CSS)) {
+    fs.copyFileSync(BASE_CSS, OUTPUT_BASE_CSS);
+  }
+
+  // Copy Theme CSS
   if (fs.existsSync(CSS_FILE)) {
     fs.copyFileSync(CSS_FILE, OUTPUT_CSS);
   } else {

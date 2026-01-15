@@ -1,45 +1,15 @@
-/* Global Vars & Reset */
+@import url("base.css");
+
+/* Overrides */
 :root {
-  --primary-color: #1e3a8a; /* Config overrides this via inline styles if needed, but defaults here */
-  --secondary-color: #64748b;
-  --accent-color: #3b82f6;
   --sidebar-bg: #f8fafc;
-  --text-color: #0f172a;
-  --text-light: #64748b;
   --sidebar-width: 30%;
-
-  /* A4 Dimensions */
-  --page-width: 210mm;
-  --page-height: 297mm;
-  --page-padding: 15mm;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #e2e8f0; /* Screen background */
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif;
-  color: var(--text-color);
-  margin: 0;
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-  font-size: 10pt;
-}
-
-/* The "Paper" Container (WYSIWYG) */
+/* Modern Theme Specific Layout */
 .sheet {
-  background: white;
-  width: var(--page-width);
-  min-height: var(--page-height);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  position: relative;
-  overflow: hidden; /* Contains the sidebar background */
+  overflow: hidden;
+  padding: 0;
 }
 
 .resume-container {
@@ -57,7 +27,7 @@ body {
   padding-top: 0;
   padding-bottom: 0;
   border-right: 1px solid #e2e8f0;
-  font-size: 0.85rem;
+  font-size: 0.9em;
 }
 
 .avatar {
@@ -86,335 +56,110 @@ body {
   padding-bottom: var(--page-padding);
 }
 
-/* Print Overrides for wrappers */
-@media print {
-  .content-wrapper,
-  .sidebar-wrapper {
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-    display: block;
-  }
-
-  /* Ensure sidebar text color is dark enough for print */
-  .sidebar {
-    color: #000;
-  }
-}
-
-/* Typography */
-h1 {
-  font-size: 2.2rem;
-  margin: 0 0 5px 0;
-  color: var(--primary-color);
-  line-height: 1.1;
-}
-
-h2 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-top: 20px;
-  margin-bottom: 12px;
-  padding-bottom: 0;
-  border-bottom: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-h2 i {
-  color: var(--accent-color);
-  opacity: 0.8;
-  font-size: 0.9em;
-}
-
-/* Unified Entry Styles */
-.entry {
-  margin-bottom: 16px;
-  break-inside: avoid;
-}
-
-/* Entry Row Layout */
-.entry-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 6px;
-}
-
-.entry-left-col {
-  flex: 1;
-  padding-right: 15px;
-}
-
-.entry-right-col {
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.entry-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-color);
-  margin: 0;
-  line-height: 1.2;
-}
-
-.entry-subtitle {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--text-color);
-  margin-top: 4px;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.company-name {
-  font-weight: 700;
-  color: var(--accent-color);
-}
-
-.company-url {
-  font-size: 0.85em;
-  margin-left: 6px;
-  margin-right: 2px;
-  color: var(--text-light);
-  transition: color 0.2s;
-}
-
-.company-url:hover {
-  color: var(--accent-color);
-}
-
-.entry-location {
-  display: block;
-  font-size: 0.85em;
-  color: var(--text-light);
-  font-weight: 400;
-  margin-top: 2px;
-}
-
-.entry-tags {
-  margin-top: 8px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.entry-date {
-  font-family: inherit;
-  font-size: 0.85rem;
-  font-weight: 400;
-  color: var(--text-color);
-  white-space: nowrap;
-}
-
-.entry-description {
-  font-size: 0.95rem;
-  margin-bottom: 6px;
-  line-height: 1.5;
-  color: #334155;
-  font-style: normal;
-}
-
-a {
-  color: var(--accent-color);
-  text-decoration: none;
-}
-
-.job-meta {
-  font-size: 0.8rem;
-  color: var(--text-light);
-  margin-bottom: 6px;
-  display: flex;
-  justify-content: space-between;
-  font-weight: 500;
-}
-
-.summary {
-  line-height: 1.5;
-  margin-bottom: 16px;
-  color: var(--secondary-color);
-}
-
-/* Highlights List */
-.entry ul {
-  padding-left: 18px;
-  margin-top: 4px;
-  margin-bottom: 8px;
-}
-
-.entry li {
-  margin-bottom: 3px;
-  line-height: 1.4;
-  font-size: 0.9rem;
-  color: #475569;
-}
-
-/* Sidebar Specifics */
+/* Sidebar Contact Items */
 .contact-item {
-  margin-bottom: 10px; /* Tighter spacing (Reverted) */
+  margin-bottom: 12px;
   display: flex;
-  align-items: center; /* Reverted to center for neatness */
-  gap: 10px;
-  font-size: 0.8rem;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  word-break: break-all;
 }
 
 .contact-icon {
-  width: 24px;
+  width: 20px;
   text-align: center;
   color: var(--accent-color);
-  flex-shrink: 0;
+  font-size: 1.1em;
 }
 
+/* Specific modern layout overrides for Shared Entries */
+
+/* Summary */
+.summary {
+  line-height: 1.6;
+  margin-bottom: 16px;
+  color: var(--secondary-color);
+  font-size: 1rem;
+}
+
+/* Skills Styling - Override Base */
 .skill-group {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .skill-name {
-  font-weight: 600;
-  margin-bottom: 6px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: var(--primary-color);
+  letter-spacing: -0.01em;
 }
 
-/* New Rating Bar */
-.skill-line {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
-  font-size: 0.8rem;
-}
-
-.skill-bar {
-  width: 70px;
-  height: 4px; /* Thinner */
-  background: #e2e8f0;
-  border-radius: 2px;
-  overflow: hidden;
-  margin-left: 10px;
-}
-
-.skill-bar-fill {
-  height: 100%;
-  background: var(--accent-color);
-  border-radius: 2px;
-}
-
-.skill-tag {
-  display: inline-block;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  padding: 4px 10px;
-  border-radius: 4px; /* More squared for tech look, better for bar */
-  font-size: 0.75rem;
-  margin: 3px 3px 3px 0;
-  color: var(--text-color);
-  font-weight: 500;
-  position: relative;
-  overflow: hidden;
-  vertical-align: middle;
-}
-
+/* Specialized Gauge Style Skill Tag */
 .skill-tag.rated {
-  padding-bottom: 6px; /* Space for the bar */
+  position: relative;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #e2e8f0;
+  border-radius: 4px 4px 0 0;
+  border: none;
+  background: none;
+  font-weight: 600;
+  margin-right: 12px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .skill-tag.rated::after {
   content: "";
   position: absolute;
-  bottom: 0;
+  bottom: -2px;
   left: 0;
-  height: 3px;
+  height: 2px;
   background-color: var(--accent-color);
   width: calc(var(--rating) * 20%);
-  opacity: 0.8;
+  transition: width 0.3s ease;
 }
 
-/* Sections */
-.tag-line {
-  font-size: 0.75em;
-  color: var(--text-light);
-  font-family: monospace;
-}
-
-/* Helper to generate PDF */
-.pdf-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: var(--primary-color);
-  color: white;
-  padding: 12px 24px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  z-index: 999;
-  transition: transform 0.2s;
-  font-family: sans-serif;
-}
-.pdf-btn:hover {
-  transform: translateY(-2px);
-}
-
-/* ================= PRINT STYLES ================= */
+/* Print Overrides */
 @media print {
-  @page {
-    size: A4;
-    margin: 0mm;
-  }
-
-  body {
-    background: none;
-    padding: 0;
-    margin: 0;
-    display: block;
-    /* Matches standard Sidebar Width 30% */
-    background: linear-gradient(to right, var(--sidebar-bg) 30%, white 30%);
+  /* Use fixed positioning to create a repeating sidebar background on every page */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 30%; /* Matches --sidebar-width */
+    background-color: #f8fafc; /* Matches --sidebar-bg */
+    border-right: 1px solid #e2e8f0;
+    z-index: -1;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  .sheet {
-    width: 100%;
-    max-width: none;
-    box-shadow: none;
-    min-height: auto;
-    background: transparent;
-    margin: 0;
-    overflow: visible; /* Critical: Allow content to flow to next page */
+  body {
+    background: none !important;
   }
 
-  .resume-container {
-    display: grid;
-    grid-template-columns: 30% 70%;
-    min-height: 0;
-    height: auto;
+  .content-wrapper,
+  .sidebar-wrapper {
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    display: block;
+    padding-top: var(--page-padding) !important;
+    padding-bottom: var(--page-padding) !important;
+  }
+
+  .sheet {
+    overflow: visible;
+    background: transparent !important;
+    position: relative;
+    z-index: 1; /* Ensure content sits above the fixed background */
   }
 
   .sidebar {
-    background: transparent;
-    border: none;
-  }
-
-  .pdf-btn,
-  .no-print {
-    display: none;
-  }
-
-  /* Page Breaks */
-  .entry {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  h2 {
-    break-after: avoid;
-    page-break-after: avoid;
+    background: transparent !important;
+    border-right: none !important;
   }
 }

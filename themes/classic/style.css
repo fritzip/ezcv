@@ -1,0 +1,96 @@
+@import url("base.css");
+
+/* Classic Theme Overrides */
+:root {
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 20px;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 20px auto;
+  display: block;
+  object-fit: cover;
+  border: 3px solid #e2e8f0;
+}
+
+.header .label {
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.contact-info,
+.social-info {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+
+.contact-item {
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.contact-item i {
+  margin-right: 5px;
+  color: var(--accent-color);
+}
+
+/* Sections */
+.section {
+  margin-bottom: 25px;
+}
+
+/* Specialized Gauge Style Skill Tag */
+.skill-tag.rated {
+  position: relative;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #e2e8f0;
+  border-radius: 4px 4px 0 0;
+  border: none;
+  background: none;
+  font-weight: 600;
+  margin-right: 12px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.skill-tag.rated::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 2px;
+  background-color: var(--accent-color);
+  width: calc(var(--rating) * 20%);
+  transition: width 0.3s ease;
+}
+
+/* Print Overrides */
+@media print {
+  .header {
+    border-bottom: 1px solid #ccc;
+  }
+}
+
+@media print {
+    @page {
+        margin: 15mm;
+    }
+    
+    .sheet {
+        padding: 0 !important;
+        width: 100% !important;
+        box-shadow: none !important;
+    }
+}
