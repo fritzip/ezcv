@@ -6,7 +6,9 @@ const ejs = require("ejs");
 // Paths
 // Allow passing an input file or default to resume.yaml
 const inputFileArg = process.argv[2];
-const DATA_FILE = inputFileArg ? path.resolve(inputFileArg) : path.join(__dirname, "resume.yaml");
+const DATA_FILE = inputFileArg
+  ? path.resolve(inputFileArg)
+  : path.join(__dirname, "resume.yaml");
 
 const CONFIG_FILE = path.join(__dirname, "config.yaml");
 const OUTPUT_DIR = path.join(__dirname, "public");
@@ -21,11 +23,12 @@ if (!fs.existsSync(OUTPUT_DIR)) {
 try {
   console.log(`📖 Reading resume data from ${DATA_FILE}...`);
   if (!fs.existsSync(DATA_FILE)) {
-      throw new Error(`Input file not found: ${DATA_FILE}`);
+    throw new Error(`Input file not found: ${DATA_FILE}`);
   }
   const resumeData = yaml.load(fs.readFileSync(DATA_FILE, "utf8"));
 
-  console.log("⚙️  Reading configuration...");  let config = { theme: "modern", style: {}, features: {} };
+  console.log("⚙️  Reading configuration...");
+  let config = { theme: "modern", style: {}, features: {} };
   if (fs.existsSync(CONFIG_FILE)) {
     const userConfig = yaml.load(fs.readFileSync(CONFIG_FILE, "utf8"));
     config = { ...config, ...userConfig };

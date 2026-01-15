@@ -13,3 +13,4 @@ features:
   showPhoto: true
   showIcons: true
   showSkillBars: true
+  showLocation: true
