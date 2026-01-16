@@ -85,10 +85,12 @@
             <h2><i class="fas fa-code"></i> Skills</h2>
             <div class="skills-container" style="display: flex; flex-wrap: wrap; gap: 20px;">
                 <% resume.skills.forEach(function(skillGroup) { %>
-                    <div class="skill-group">
-                        <strong class="skill-name" style="display:block; margin-bottom:5px;"><%= skillGroup.name %></strong>
-                        <div class="tags-wrapper">
-                        <% skillGroup.keywords.forEach(function(keyword) { %>
+                        <div class="skill-group">
+                            <div class="skill-name">
+                                <span><%= skillGroup.name %></span>
+                            </div>
+                            <div>
+                                <% skillGroup.keywords.forEach(function(keyword) { %>
                             <% 
                                 var kName = typeof keyword === 'object' ? keyword.name : keyword;
                                 var kLevel = typeof keyword === 'object' ? keyword.level : 0;
@@ -100,6 +102,20 @@
                         </div>
                     </div>
                 <% }); %>
+            </div>
+        </section>
+        <% } %>
+
+        <% if (resume.languages && resume.languages.length) { %>
+        <section class="section">
+            <h2><i class="fas fa-language"></i> Languages</h2>
+            <div class="skills-container" style="display: flex; flex-wrap: wrap; gap: 20px;">
+            <% resume.languages.forEach(function(lang) { %>
+                <div style="display:block; margin-bottom:8px; margin-right: 20px;">
+                    <strong><%= lang.language %></strong>
+                    <div style="font-size:0.8em; color:var(--text-light)"><%= lang.fluency %></div>
+                </div>
+            <% }); %>
             </div>
         </section>
         <% } %>
@@ -139,6 +155,14 @@
                         <% }); %>
                         </ul>
                     <% } %>
+
+                    <% if (job.keywords && job.keywords.length) { %>
+                        <div class="entry-tags">
+                            <% job.keywords.forEach(function(keyword) { %>
+                                <span class="skill-tag"><%= keyword %></span>
+                            <% }); %>
+                        </div>
+                    <% } %>
                 </div>
             <% }); %>
         </section>
@@ -155,16 +179,16 @@
                         </div>
                         <div class="entry-right">
                             <% if (project.url) { %>
-                                <div class="entry-date"><a href="<%= project.url %>" target="_blank">Link <i class="fas fa-external-link-alt"></i></a></div>
+                                <div class="entry-date" style="color:var(--accent-color)"> 
+                                    <a href="<%= project.url %>" target="_blank"><i class="fas fa-link"></i> Link</a>
+                                </div>
                             <% } %>
                         </div>
                     </div>
                     <p class="entry-summary"><%= project.description %></p>
                     <% if (project.keywords && project.keywords.length) { %>
                         <div class="entry-tags">
-                            <% project.keywords.forEach(function(keyword) { %>
-                                <span class="skill-tag"><%= keyword %></span>
-                            <% }); %>
+                            STACK: <%= project.keywords.join(' · ') %>
                         </div>
                     <% } %>
                 </div>
@@ -243,7 +267,7 @@
                     <div class="entry-header">
                         <div class="entry-left">
                             <% if (pub.url) { %> 
-                                <h3 class="entry-title"><a href="<%= pub.url %>" target="_blank"><%= pub.name %> <i class="fas fa-external-link-alt" style="font-size: 0.8em; margin-left: 4px;"></i></a></h3>
+                                <a href="<%= pub.url %>" target="_blank" class="entry-title"><%= pub.name %> <i class="fas fa-external-link-alt" style="font-size: 0.8em; margin-left: 4px;"></i></a> 
                             <% } else { %>
                                 <h3 class="entry-title"><%= pub.name %></h3>
                             <% } %>
@@ -262,15 +286,31 @@
         <% if (resume.interests && resume.interests.length) { %>
         <section class="section">
             <h2><i class="fas fa-heart"></i> Interests</h2>
-            <div class="entry-tags">
-            <% resume.interests.forEach(function(interest) { %>
-                <span class="skill-tag"><%= interest.name %>
-                <% if (interest.keywords && interest.keywords.length) { %>
-                 (<%= interest.keywords.join(', ') %>)
-                <% } %>
-                </span>
-            <% }); %>
-            </div>
+            <% 
+            var hasKeywords = resume.interests.some(i => i.keywords && i.keywords.length > 0);
+            if (hasKeywords) { 
+            %>
+                <div class="skills-container" style="display: flex; flex-wrap: wrap; gap: 20px;">
+                <% resume.interests.forEach(function(interest) { %>
+                    <div class="skill-group">
+                        <div class="skill-name" style="margin-bottom: 5px;"><%= interest.name %></div>
+                        <% if (interest.keywords && interest.keywords.length) { %>
+                        <div class="tags-container">
+                            <% interest.keywords.forEach(function(keyword) { %>
+                                <span class="skill-tag"><%= keyword %></span>
+                            <% }); %>
+                        </div>
+                        <% } %>
+                    </div>
+                <% }); %>
+                </div>
+            <% } else { %>
+                <div class="tags-container">
+                    <% resume.interests.forEach(function(interest) { %>
+                        <div class="skill-tag"><%= interest.name %></div>
+                    <% }); %>
+                </div>
+            <% } %>
         </section>
         <% } %>
 

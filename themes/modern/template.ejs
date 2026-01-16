@@ -137,8 +137,8 @@
                     if (hasKeywords) { 
                     %>
                         <% resume.interests.forEach(function(interest) { %>
-                            <div style="margin-bottom: 15px;">
-                                <h3 style="margin-bottom: 5px; font-size: 1.1em; color: var(--text-color);"><%= interest.name %></h3>
+                            <div class="skill-group" style="margin-bottom: 15px;">
+                                <div class="skill-name" style="margin-bottom: 5px;"><%= interest.name %></div>
                                 <% if (interest.keywords && interest.keywords.length) { %>
                                 <div class="tags-container">
                                     <% interest.keywords.forEach(function(keyword) { %>

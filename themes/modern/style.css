@@ -30,12 +30,6 @@
   font-size: 0.9em;
 }
 
-.avatar {
-  background-color: #cbd5e0;
-  border: 3px solid white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 /* Main Content */
 .main-content {
   padding-right: var(--page-padding);
@@ -72,19 +66,6 @@
 }
 
 /* Specific modern layout overrides for Shared Entries */
-
-/* Skills Styling - Override Base */
-.skill-group {
-  margin-bottom: 25px;
-}
-
-.skill-name {
-  font-weight: 700;
-  margin-bottom: 8px;
-  font-size: 0.95rem;
-  color: var(--primary-color);
-  letter-spacing: -0.01em;
-}
 
 /* Print Overrides */
 @media print {
