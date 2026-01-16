@@ -156,7 +156,13 @@
                     <% if (job.keywords && job.keywords.length) { %>
                         <div class="entry-tags">
                             <% job.keywords.forEach(function(keyword) { %>
-                                <span class="item-tag"><%= keyword %></span>
+                                <% 
+                                    var kName = typeof keyword === 'object' ? keyword.name : keyword;
+                                    var kLevel = typeof keyword === 'object' ? keyword.level : 0;
+                                %>
+                                <span class="item-tag <%= kLevel > 0 ? 'rated rated-' + kLevel : '' %>">
+                                    <%= kName %>
+                                </span>
                             <% }); %>
                         </div>
                     <% } %>
@@ -185,7 +191,15 @@
                     <p class="entry-summary"><%= project.description %></p>
                     <% if (project.keywords && project.keywords.length) { %>
                         <div class="entry-tags">
-                            STACK: <%= project.keywords.join(' · ') %>
+                            <% project.keywords.forEach(function(keyword) { %>
+                                <% 
+                                    var kName = typeof keyword === 'object' ? keyword.name : keyword;
+                                    var kLevel = typeof keyword === 'object' ? keyword.level : 0;
+                                %>
+                                <span class="item-tag <%= kLevel > 0 ? 'rated rated-' + kLevel : '' %>">
+                                    <%= kName %>
+                                </span>
+                            <% }); %>
                         </div>
                     <% } %>
                 </div>
@@ -293,7 +307,13 @@
                         <% if (interest.keywords && interest.keywords.length) { %>
                         <div class="tags-container">
                             <% interest.keywords.forEach(function(keyword) { %>
-                                <span class="item-tag"><%= keyword %></span>
+                                <% 
+                                    var kName = typeof keyword === 'object' ? keyword.name : keyword;
+                                    var kLevel = typeof keyword === 'object' ? keyword.level : 0;
+                                %>
+                                <span class="item-tag <%= kLevel > 0 ? 'rated rated-' + kLevel : '' %>">
+                                    <%= kName %>
+                                </span>
                             <% }); %>
                         </div>
                         <% } %>

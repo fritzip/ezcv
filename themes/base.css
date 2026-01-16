@@ -188,8 +188,9 @@ ul {
 
 /* Skill Tags - Shared Style */
 .item-tag {
-  display: inline-block;
-  padding: 2px 8px;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
   margin: 0 4px 4px 0;
   background-color: #f1f5f9;
   border-radius: 4px;
@@ -197,6 +198,7 @@ ul {
   color: #334155;
   font-weight: 500;
   border: 1px solid #e2e8f0;
+  vertical-align: middle;
 }
 
 /* Print Styles */
@@ -257,38 +259,56 @@ ul {
   object-fit: cover;
 }
 
-/* Profile Summary */
-
-/* Specialized Gauge Style Skill Tag */
+/* Specialized Dot Style Skill Tag */
 .item-tag.rated {
-  position: relative;
-  padding-bottom: 6px;
-  border-bottom: 2px solid #e2e8f0;
-  border-radius: 4px 4px 0 0;
-  border: none;
-  background: none;
-  font-weight: 600;
-  margin-right: 12px;
-  padding-left: 0;
-  padding-right: 0;
+  /* Default flex flow works well vertically centered */
 }
 
-/* Rating Classes to avoid inline styles */
-.rated-1 { --rating: 1; }
-.rated-2 { --rating: 2; }
-.rated-3 { --rating: 3; }
-.rated-4 { --rating: 4; }
-.rated-5 { --rating: 5; }
-
+/* Base Dot (Dot 1) & Positioning */
 .item-tag.rated::after {
   content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  height: 2px;
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+
+  /* Alignment */
+  margin-left: 8px; /* Space between text and first dot */
+  margin-right: 32px; /* Reserve space for the 4 shadow dots */
+
+  /* Default: All empty (gray) */
+  background-color: #cbd5e0;
+  box-shadow: 8px 0 0 0 #cbd5e0, 16px 0 0 0 #cbd5e0, 24px 0 0 0 #cbd5e0,
+    32px 0 0 0 #cbd5e0;
+}
+
+/* Rating variants: Color the dots! */
+.item-tag.rated.rated-1::after {
   background-color: var(--accent-color);
-  width: calc(var(--rating) * 20%);
-  transition: width 0.3s ease;
+}
+
+.item-tag.rated.rated-2::after {
+  background-color: var(--accent-color);
+  box-shadow: 8px 0 0 0 var(--accent-color), 16px 0 0 0 #cbd5e0,
+    24px 0 0 0 #cbd5e0, 32px 0 0 0 #cbd5e0;
+}
+
+.item-tag.rated.rated-3::after {
+  background-color: var(--accent-color);
+  box-shadow: 8px 0 0 0 var(--accent-color), 16px 0 0 0 var(--accent-color),
+    24px 0 0 0 #cbd5e0, 32px 0 0 0 #cbd5e0;
+}
+
+.item-tag.rated.rated-4::after {
+  background-color: var(--accent-color);
+  box-shadow: 8px 0 0 0 var(--accent-color), 16px 0 0 0 var(--accent-color),
+    24px 0 0 0 var(--accent-color), 32px 0 0 0 #cbd5e0;
+}
+
+.item-tag.rated.rated-5::after {
+  background-color: var(--accent-color);
+  box-shadow: 8px 0 0 0 var(--accent-color), 16px 0 0 0 var(--accent-color),
+    24px 0 0 0 var(--accent-color), 32px 0 0 0 var(--accent-color);
 }
 
 /* Profile Summary */
@@ -301,10 +321,11 @@ ul {
 
 /* Item Group Headers */
 .item-group {
-    margin-bottom: 12px;
-    break-inside: avoid;
-    page-break-inside: avoid;
+  margin-bottom: 12px;
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
+
 .item-name {
   font-weight: 700;
   margin-bottom: 4px;
