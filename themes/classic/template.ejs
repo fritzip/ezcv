@@ -20,6 +20,7 @@
             <% if (config.style.primaryColor) { %> --primary-color: <%= config.style.primaryColor %>; <% } %>
             <% if (config.style.secondaryColor) { %> --secondary-color: <%= config.style.secondaryColor %>; <% } %>
             <% if (config.style.pagePadding) { %> --page-padding: <%= config.style.pagePadding %>; <% } %>
+            <% if (config.style.baseFontSize) { %> --base-font-size: <%= config.style.baseFontSize %>; <% } %>
         }
     </style>
 </head>
@@ -83,40 +84,36 @@
         <% if (resume.skills && resume.skills.length) { %>
         <section class="section">
             <h2><i class="fas fa-code"></i> Skills</h2>
-            <div class="skills-container" style="display: flex; flex-wrap: wrap; gap: 20px;">
-                <% resume.skills.forEach(function(skillGroup) { %>
-                        <div class="skill-group">
-                            <div class="skill-name">
-                                <span><%= skillGroup.name %></span>
-                            </div>
-                            <div>
-                                <% skillGroup.keywords.forEach(function(keyword) { %>
-                            <% 
-                                var kName = typeof keyword === 'object' ? keyword.name : keyword;
-                                var kLevel = typeof keyword === 'object' ? keyword.level : 0;
-                            %>
-                            <span class="skill-tag <%= kLevel > 0 ? 'rated' : '' %>" style="--rating: <%= kLevel %>">
-                                <%= kName %>
-                            </span>
-                        <% }); %>
+            <% resume.skills.forEach(function(skillGroup) { %>
+                    <div class="item-group">
+                        <div class="item-name">
+                            <span><%= skillGroup.name %></span>
                         </div>
+                        <div>
+                            <% skillGroup.keywords.forEach(function(keyword) { %>
+                        <% 
+                            var kName = typeof keyword === 'object' ? keyword.name : keyword;
+                            var kLevel = typeof keyword === 'object' ? keyword.level : 0;
+                        %>
+                        <span class="item-tag <%= kLevel > 0 ? 'rated rated-' + kLevel : '' %>">
+                            <%= kName %>
+                        </span>
+                    <% }); %>
                     </div>
-                <% }); %>
-            </div>
+                </div>
+            <% }); %>
         </section>
         <% } %>
 
         <% if (resume.languages && resume.languages.length) { %>
         <section class="section">
             <h2><i class="fas fa-language"></i> Languages</h2>
-            <div class="skills-container" style="display: flex; flex-wrap: wrap; gap: 20px;">
             <% resume.languages.forEach(function(lang) { %>
                 <div style="display:block; margin-bottom:8px; margin-right: 20px;">
                     <strong><%= lang.language %></strong>
                     <div style="font-size:0.8em; color:var(--text-light)"><%= lang.fluency %></div>
                 </div>
             <% }); %>
-            </div>
         </section>
         <% } %>
 
@@ -159,7 +156,7 @@
                     <% if (job.keywords && job.keywords.length) { %>
                         <div class="entry-tags">
                             <% job.keywords.forEach(function(keyword) { %>
-                                <span class="skill-tag"><%= keyword %></span>
+                                <span class="item-tag"><%= keyword %></span>
                             <% }); %>
                         </div>
                     <% } %>
@@ -290,24 +287,22 @@
             var hasKeywords = resume.interests.some(i => i.keywords && i.keywords.length > 0);
             if (hasKeywords) { 
             %>
-                <div class="skills-container" style="display: flex; flex-wrap: wrap; gap: 20px;">
                 <% resume.interests.forEach(function(interest) { %>
-                    <div class="skill-group">
-                        <div class="skill-name" style="margin-bottom: 5px;"><%= interest.name %></div>
+                    <div class="item-group">
+                        <div class="item-name"><%= interest.name %></div>
                         <% if (interest.keywords && interest.keywords.length) { %>
                         <div class="tags-container">
                             <% interest.keywords.forEach(function(keyword) { %>
-                                <span class="skill-tag"><%= keyword %></span>
+                                <span class="item-tag"><%= keyword %></span>
                             <% }); %>
                         </div>
                         <% } %>
                     </div>
                 <% }); %>
-                </div>
             <% } else { %>
                 <div class="tags-container">
                     <% resume.interests.forEach(function(interest) { %>
-                        <div class="skill-tag"><%= interest.name %></div>
+                        <div class="item-tag"><%= interest.name %></div>
                     <% }); %>
                 </div>
             <% } %>

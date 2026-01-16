@@ -23,7 +23,7 @@
 .sidebar {
   background-color: var(--sidebar-bg);
   padding-left: var(--page-padding);
-  padding-right: 18px;
+  padding-right: 25px;
   padding-top: 0;
   padding-bottom: 0;
   border-right: 1px solid #e2e8f0;
@@ -33,7 +33,7 @@
 /* Main Content */
 .main-content {
   padding-right: var(--page-padding);
-  padding-left: 15mm;
+  padding-left: 25px;
   padding-top: 0;
   padding-bottom: 0;
 }

@@ -20,6 +20,7 @@
             <% if (config.style.primaryColor) { %> --primary-color: <%= config.style.primaryColor %>; <% } %>
             <% if (config.style.secondaryColor) { %> --secondary-color: <%= config.style.secondaryColor %>; <% } %>
             <% if (config.style.pagePadding) { %> --page-padding: <%= config.style.pagePadding %>; <% } %>
+            <% if (config.style.baseFontSize) { %> --base-font-size: <%= config.style.baseFontSize %>; <% } %>
         }
     </style>
 </head>
@@ -73,8 +74,8 @@
                 <section>
                     <h2><i class="fas fa-code"></i> Skills</h2>
                     <% resume.skills.forEach(function(skillGroup) { %>
-                        <div class="skill-group">
-                            <div class="skill-name">
+                        <div class="item-group">
+                            <div class="item-name">
                                 <span><%= skillGroup.name %></span>
                             </div>
                             <div>
@@ -84,7 +85,7 @@
                                         var kLevel = typeof keyword === 'object' ? keyword.level : 0;
                                     %>
                                     
-                                    <span class="skill-tag <%= kLevel > 0 ? 'rated' : '' %>" style="--rating: <%= kLevel %>">
+                                    <span class="item-tag <%= kLevel > 0 ? 'rated rated-' + kLevel : '' %>">
                                         <%= kName %>
                                     </span>
 
@@ -137,12 +138,12 @@
                     if (hasKeywords) { 
                     %>
                         <% resume.interests.forEach(function(interest) { %>
-                            <div class="skill-group" style="margin-bottom: 15px;">
-                                <div class="skill-name" style="margin-bottom: 5px;"><%= interest.name %></div>
+                            <div class="item-group">
+                                <div class="item-name"><%= interest.name %></div>
                                 <% if (interest.keywords && interest.keywords.length) { %>
                                 <div class="tags-container">
                                     <% interest.keywords.forEach(function(keyword) { %>
-                                        <span class="skill-tag"><%= keyword %></span>
+                                        <span class="item-tag"><%= keyword %></span>
                                     <% }); %>
                                 </div>
                                 <% } %>
@@ -151,7 +152,7 @@
                     <% } else { %>
                         <div class="tags-container">
                             <% resume.interests.forEach(function(interest) { %>
-                                <div class="skill-tag"><%= interest.name %></div>
+                                <div class="item-tag"><%= interest.name %></div>
                             <% }); %>
                         </div>
                     <% } %>
@@ -218,7 +219,7 @@
                             <% if (job.keywords && job.keywords.length) { %>
                                 <div class="entry-tags">
                                     <% job.keywords.forEach(function(keyword) { %>
-                                        <span class="skill-tag"><%= keyword %></span>
+                                        <span class="item-tag"><%= keyword %></span>
                                     <% }); %>
                                 </div>
                             <% } %>

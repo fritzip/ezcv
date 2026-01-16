@@ -12,6 +12,7 @@
   --page-width: 210mm;
   --page-height: 297mm;
   --page-padding: 15mm;
+  --base-font-size: 10pt;
 }
 
 * {
@@ -26,7 +27,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif;
   line-height: 1.5;
-  font-size: 10pt;
+  font-size: var(--base-font-size);
   min-height: 100vh;
   margin: 0;
   padding: 20px 0;
@@ -186,7 +187,7 @@ ul {
 /* .company-name styles are now integrated into .entry-subtitle above */
 
 /* Skill Tags - Shared Style */
-.skill-tag {
+.item-tag {
   display: inline-block;
   padding: 2px 8px;
   margin: 0 4px 4px 0;
@@ -199,6 +200,11 @@ ul {
 }
 
 /* Print Styles */
+@page {
+  margin: 0;
+  size: auto;
+}
+
 @media print {
   body {
     background: none;
@@ -213,10 +219,6 @@ ul {
   }
   .pdf-btn {
     display: none;
-  }
-
-  @page {
-    margin: 0;
   }
 }
 
@@ -258,7 +260,7 @@ ul {
 /* Profile Summary */
 
 /* Specialized Gauge Style Skill Tag */
-.skill-tag.rated {
+.item-tag.rated {
   position: relative;
   padding-bottom: 6px;
   border-bottom: 2px solid #e2e8f0;
@@ -271,7 +273,14 @@ ul {
   padding-right: 0;
 }
 
-.skill-tag.rated::after {
+/* Rating Classes to avoid inline styles */
+.rated-1 { --rating: 1; }
+.rated-2 { --rating: 2; }
+.rated-3 { --rating: 3; }
+.rated-4 { --rating: 4; }
+.rated-5 { --rating: 5; }
+
+.item-tag.rated::after {
   content: "";
   position: absolute;
   bottom: -2px;
@@ -290,13 +299,15 @@ ul {
   font-size: 1rem;
 }
 
-/* Skill Group Headers */
-.skill-group {
-    margin-bottom: 25px;
+/* Item Group Headers */
+.item-group {
+    margin-bottom: 12px;
+    break-inside: avoid;
+    page-break-inside: avoid;
 }
-.skill-name {
+.item-name {
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   font-size: 0.95rem;
   color: var(--primary-color);
   letter-spacing: -0.01em;
