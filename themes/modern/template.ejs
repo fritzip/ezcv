@@ -187,9 +187,9 @@
                                     <h3 class="entry-title"><%= job.position %></h3>
                                     <div class="entry-subtitle">
                                         <% if (job.url) { %> 
-                                            <a href="<%= job.url %>" target="_blank" class="company-name" title="<%= job.url %>"><%= job.name %> <i class="fas fa-external-link-alt" style="font-size: 0.8em; margin-left: 4px;"></i></a> 
+                                            <a href="<%= job.url %>" target="_blank" title="<%= job.url %>"><%= job.name %> <i class="fas fa-external-link-alt" style="font-size: 0.8em; margin-left: 4px;"></i></a> 
                                         <% } else { %>
-                                            <span class="company-name"><%= job.name %></span>
+                                            <%= job.name %>
                                         <% } %>
                                     </div>
                                 </div>
@@ -264,7 +264,7 @@
                                 <div class="entry-left">
                                     <h3 class="entry-title"><%= edu.studyType %> in <%= edu.area %></h3>
                                     <div class="entry-subtitle">
-                                        <span class="company-name" style="font-weight:600;"><%= edu.institution %></span>
+                                        <%= edu.institution %>
                                     </div>
                                     <% if (edu.score) { %>
                                         <div class="entry-summary" style="font-size: 0.85em; margin-top: 2px; font-style:normal"><%= edu.score %></div>
@@ -335,7 +335,7 @@
                                         <h3 class="entry-title"><%= pub.name %></h3>
                                     <% } %>
                                     <div class="entry-subtitle">    
-                                        <span class="company-name"><%= pub.publisher %></span>
+                                        <%= pub.publisher %>
                                     </div>
                                     <p class="entry-summary"><%= pub.summary %></p>
                                 </div>
