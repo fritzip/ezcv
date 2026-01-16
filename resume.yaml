@@ -64,7 +64,7 @@ work:
       - "Introduced internal developer tooling that reduced onboarding time for new hires by 50%."
       - "Implemented a comprehensive analytics dashboard allowing stakeholders to visualize key performance metrics."
       - "Refactored the core payment processing module, reducing transaction failures by 15%."
-      
+
   - name: "Creative Startups Inc."
     position: "Senior Full Stack Engineer"
     url: "https://creativestartups.io"
@@ -100,10 +100,11 @@ education:
     startDate: "2017-09"
     endDate: "2019-06"
     score: "Magna Cum Laude"
-    
+
   - institution: "State College"
     area: "Information Systems"
     studyType: "Bachelor of Science"
+    score: "Summa Cum Laude"
     startDate: "2013-09"
     endDate: "2017-06"
 
@@ -112,6 +113,11 @@ awards:
     date: "2023"
     awarder: "Global Tech Solutions"
     summary: "Recognized for outstanding leadership."
+
+  - title: "Best Innovation Award"
+    date: "2021"
+    awarder: "Creative Startups Inc."
+    summary: "For developing a groundbreaking real-time collaboration feature."
 
 certificates:
   - name: "AWS Certified Solutions Architect"
@@ -145,3 +151,24 @@ publications:
     releaseDate: "2022-11"
     url: "https://nodeweekly.com/issues/42"
     summary: "Best practices for handling high-concurrency workloads."
+
+projects:
+  - name: "DevTracker"
+    description: "An open-source project management tool for developers."
+    url: "https://devtracker.example.com"
+    highlights:
+      - "Implemented task boards, issue tracking, and team collaboration features."
+      - "Achieved 1,000+ stars on GitHub and a growing community of contributors."
+
+  - name: "PhotoSnap"
+    description: "A mobile app for quick photo editing and sharing."
+    url: "https://photosnap.example.com"
+    highlights:
+      - "Developed using React Native, featuring filters, cropping, and social media integration."
+      - "Over 50,000 downloads on the App Store and Google Play."
+
+references:
+  - name: "Jane Smith"
+    reference: "Managing Director at Global Tech Solutions."
+  - name: "John Doe"
+    reference: "CTO at Creative Startups Inc."

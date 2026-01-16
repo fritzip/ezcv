@@ -103,6 +103,8 @@ h2 {
   display: flex;
   align-items: center;
   gap: 0.5em; /* Scaled gap */
+  page-break-after: avoid; /* Keep title with first entry */
+  break-after: avoid;
 }
 
 h2 > i {
@@ -128,6 +130,7 @@ ul {
 .entry {
   margin-bottom: var(--s-5);
   break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .entry-header {
@@ -369,7 +372,7 @@ ul {
 }
 
 /* Utility Classes replacing inline styles */
-.language-fluency {
+.item-detail {
   font-size: 0.9em;
   color: var(--text-light);
 }
@@ -380,37 +383,26 @@ ul {
 }
 
 /* Generic Utility Component Classes */
-.language-item {
-  display: block;
-  margin-bottom: var(--s-2);
-}
-
 .divider {
   border: 0;
   border-bottom: 2px solid #e2e8f0;
   margin-bottom: var(--s-5);
 }
 
-.entry-date-accent {
-  color: var(--accent-color);
-}
-
-.education-score {
-  margin-top: calc(2px * var(--spacing-scale));
-  font-style: normal;
-}
-
-.awarder {
-  font-style: italic;
-}
-
-.reference-entry {
+/* Computes/Layout Utilities */
+.entry-compact {
   margin-bottom: var(--s-3);
   page-break-inside: avoid;
 }
 
-.references-note {
+/* Text & Style Utilities */
+.text-accent {
+  color: var(--accent-color);
+}
+
+.section-note {
   color: var(--text-light);
   font-style: italic;
-  margin-top: var(--s-3);
+  font-size: 0.9em;
 }
+
