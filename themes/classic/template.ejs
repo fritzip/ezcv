@@ -19,8 +19,10 @@
         :root {
             <% if (config.style.primaryColor) { %> --primary-color: <%= config.style.primaryColor %>; <% } %>
             <% if (config.style.secondaryColor) { %> --secondary-color: <%= config.style.secondaryColor %>; <% } %>
-            <% if (config.style.pagePadding) { %> --page-padding: <%= config.style.pagePadding %>; <% } %>
-            <% if (config.style.baseFontSize) { %> --base-font-size: <%= config.style.baseFontSize %>; <% } %>
+            <% if (config.style.spacingScale) { %> --spacing-scale: <%= config.style.spacingScale %>; <% } %>
+            <% if (config.style.fontSizeScale) { %> --font-size-scale: <%= config.style.fontSizeScale %>; <% } %>
+            <% if (config.style.pagePaddingScale) { %> --page-padding-scale: <%= config.style.pagePaddingScale %>; <% } %>
+            <% if (config.style.sectionGapScale) { %> --section-gap-scale: <%= config.style.sectionGapScale %>; <% } %>
         }
     </style>
 </head>
@@ -109,9 +111,9 @@
         <section class="section">
             <h2><i class="fas fa-language"></i> Languages</h2>
             <% resume.languages.forEach(function(lang) { %>
-                <div style="display:block; margin-bottom:8px; margin-right: 20px;">
+                <div class="language-item" style="margin-right: 20px;">
                     <strong><%= lang.language %></strong>
-                    <div style="font-size:0.8em; color:var(--text-light)"><%= lang.fluency %></div>
+                    <div class="language-fluency"><%= lang.fluency %></div>
                 </div>
             <% }); %>
         </section>
@@ -127,7 +129,7 @@
                             <h3 class="entry-title"><%= job.position %></h3>
                             <div class="entry-subtitle">
                                 <% if (job.url) { %> 
-                                    <a href="<%= job.url %>" target="_blank"><%= job.name %> <i class="fas fa-external-link-alt" style="font-size: 0.8em; margin-left: 4px;"></i></a> 
+                                    <a href="<%= job.url %>" target="_blank"><%= job.name %> <i class="fas fa-external-link-alt external-link-icon"></i></a> 
                                 <% } else { %>
                                     <%= job.name %>
                                 <% } %>
@@ -182,7 +184,7 @@
                         </div>
                         <div class="entry-right">
                             <% if (project.url) { %>
-                                <div class="entry-date" style="color:var(--accent-color)"> 
+                                <div class="entry-date entry-date-accent"> 
                                     <a href="<%= project.url %>" target="_blank"><i class="fas fa-link"></i> Link</a>
                                 </div>
                             <% } %>
@@ -217,7 +219,7 @@
                             <h3 class="entry-title"><%= edu.studyType %> in <%= edu.area %></h3>
                             <div class="entry-subtitle"><%= edu.institution %></div>
                              <% if (edu.score) { %>
-                                <div class="entry-summary" style="font-size: 0.85em; margin-top: 2px; font-style:normal"><%= edu.score %></div>
+                                <div class="entry-summary education-score"><%= edu.score %></div>
                             <% } %>
                         </div>
                         <div class="entry-right">
@@ -264,7 +266,7 @@
                             <div class="entry-date"><%= award.date %></div>
                         </div>
                     </div>
-                    <div class="entry-summary"><%= award.summary %> — <span style="font-style:italic"><%= award.awarder %></span></div>
+                    <div class="entry-summary"><%= award.summary %> — <span class="awarder"><%= award.awarder %></span></div>
                 </div>
             <% }); %>
         </section>
@@ -278,7 +280,7 @@
                     <div class="entry-header">
                         <div class="entry-left">
                             <% if (pub.url) { %> 
-                                <a href="<%= pub.url %>" target="_blank" class="entry-title"><%= pub.name %> <i class="fas fa-external-link-alt" style="font-size: 0.8em; margin-left: 4px;"></i></a> 
+                                <a href="<%= pub.url %>" target="_blank" class="entry-title"><%= pub.name %> <i class="fas fa-external-link-alt external-link-icon"></i></a> 
                             <% } else { %>
                                 <h3 class="entry-title"><%= pub.name %></h3>
                             <% } %>
@@ -334,17 +336,17 @@
             <% if (resume.references && resume.references.length) { %>
                 <div class="references-container">
                     <% resume.references.forEach(function(ref) { %>
-                        <div class="entry" style="margin-bottom: 10px; page-break-inside: avoid;">
+                        <div class="entry reference-entry">
                             <div class="entry-left">
-                                <h3 class="entry-title" style="font-size: 1rem;"><%= ref.name %></h3>
+                                <h3 class="entry-title"><%= ref.name %></h3>
                                 <div class="entry-subtitle"><%= ref.reference %></div>
                             </div>
                         </div>
                     <% }); %>
                 </div>
-                <p style="color: var(--text-light); font-style: italic; margin-top: 10px;">Contact details available upon request.</p>
+                <p class="references-note">Contact details available upon request.</p>
             <% } else { %>
-                <p style="color: var(--text-light); font-style: italic;">References available upon request.</p>
+                <p class="references-note">References available upon request.</p>
             <% } %>
         </section>
 

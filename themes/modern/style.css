@@ -22,8 +22,8 @@
 /* Sidebar */
 .sidebar {
   background-color: var(--sidebar-bg);
-  padding-left: var(--page-padding);
-  padding-right: 25px;
+  padding-left: var(--section-gap);
+  padding-right: var(--section-gap);
   padding-top: 0;
   padding-bottom: 0;
   border-right: 1px solid #e2e8f0;
@@ -33,7 +33,7 @@
 /* Main Content */
 .main-content {
   padding-right: var(--page-padding);
-  padding-left: 25px;
+  padding-left: var(--section-gap);
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -44,25 +44,41 @@
   padding-bottom: var(--page-padding);
 }
 
+.content-wrapper header {
+  margin-bottom: var(--s-8);
+}
+
+.content-wrapper header .summary {
+  margin-top: var(--s-4);
+}
+
 /* Sidebar Contact Items */
 .contact-item {
-  margin-bottom: 6px;
+  margin-bottom: calc(6px * var(--spacing-scale));
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  font-size: 0.9rem;
+  gap: var(--s-3);
+  font-size: calc(0.9rem * var(--font-size-scale));
   overflow-wrap: anywhere;
   /* Ensure text wraps properly */
   min-width: 0;
 }
 
 .contact-icon {
-  width: 20px;
+  width: var(--s-5);
   text-align: center;
   color: var(--accent-color);
   font-size: 1.1em;
   flex-shrink: 0;
   margin-top: 2px;
+}
+
+/* Profile Label (Modern) */
+.profile-label {
+  font-size: calc(1.2rem * var(--font-size-scale));
+  color: var(--accent-color);
+  margin-top: 5px;
+  font-weight: 500;
 }
 
 /* Specific modern layout overrides for Shared Entries */

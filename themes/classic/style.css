@@ -7,39 +7,39 @@
 /* Header */
 .header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: var(--s-8); /* 30px approx 32px or calc(30px*scale) */
   border-bottom: 2px solid #e2e8f0;
-  padding-bottom: 20px;
+  padding-bottom: var(--s-5);
 }
 
 .header .label {
-  font-size: 1.2rem;
+  font-size: calc(1.2rem * var(--font-size-scale));
   color: var(--accent-color);
-  margin-bottom: 15px;
+  margin-bottom: var(--s-4); /* 15px approx 16px */
   font-weight: 500;
 }
 
 .contact-info,
 .social-info {
-  font-size: 0.95rem;
+  font-size: calc(0.95rem * var(--font-size-scale));
   color: var(--text-light);
-  margin-bottom: 6px;
+  margin-bottom: calc(6px * var(--spacing-scale));
 }
 
 .contact-item {
-  margin: 0 10px;
+  margin: 0 var(--s-3); /* 10px approx 12px? or s-2 8px? let's stick to s-3 roughly */
   display: inline-block;
 }
 
 .contact-item i {
-  margin-right: 5px;
+  margin-right: var(--s-1); /* 5px approx 4px */
   color: var(--accent-color);
   font-size: 1.1em;
 }
 
 /* Sections */
 .section {
-  margin-bottom: 25px;
+  margin-bottom: var(--section-gap);
 }
 
 /* Print Overrides */

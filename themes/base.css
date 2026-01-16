@@ -11,8 +11,45 @@
   /* Dimensions */
   --page-width: 210mm;
   --page-height: 297mm;
-  --page-padding: 15mm;
-  --base-font-size: 10pt;
+
+  /* Scaling Factors (Defaults, overridden by Config) */
+  --spacing-scale: 1;
+  --font-size-scale: 1;
+  --page-padding-scale: 1;
+  --section-gap-scale: 1;
+
+  /* Base Definitions */
+  --base-page-padding: 10mm; /* Standard A4 Margin-like */
+  --base-section-gap: 25px;
+  --base-item-gap: 12px;
+  --base-font-val: 10pt;
+
+  /* Computed Spacings */
+  /* Page Padding affected by generic spacing scale AND specific padding scale */
+  --page-padding: calc(
+    var(--base-page-padding) * var(--spacing-scale) * var(--page-padding-scale)
+  );
+
+  /* Section Gap affected by generic spacing scale AND specific gap scale */
+  --section-gap: calc(
+    var(--base-section-gap) * var(--spacing-scale) * var(--section-gap-scale)
+  );
+
+  /* Item Gap only affected by generic spacing scale */
+  --item-gap: calc(var(--base-item-gap) * var(--spacing-scale));
+
+  /* Computed Typography */
+  --base-font-size: calc(var(--base-font-val) * var(--font-size-scale));
+
+  /* General Utility Spaces */
+  --s-1: calc(4px * var(--spacing-scale));
+  --s-2: calc(8px * var(--spacing-scale));
+  --s-3: calc(12px * var(--spacing-scale));
+  --s-4: calc(16px * var(--spacing-scale));
+  --s-5: calc(20px * var(--spacing-scale));
+  --s-6: calc(24px * var(--spacing-scale));
+  --s-7: calc(28px * var(--spacing-scale));
+  --s-8: calc(32px * var(--spacing-scale));
 }
 
 * {
@@ -30,7 +67,7 @@ body {
   font-size: var(--base-font-size);
   min-height: 100vh;
   margin: 0;
-  padding: 20px 0;
+  padding: var(--s-5) 0;
   display: flex;
   justify-content: center;
   -webkit-print-color-adjust: exact;
@@ -50,22 +87,22 @@ body {
 
 /* Typography */
 h1 {
-  font-size: 2.5rem;
-  margin: 0 0 5px 0;
+  font-size: calc(2.5rem * var(--font-size-scale));
+  margin: 0 0 var(--s-1) 0;
   color: var(--primary-color);
   line-height: 1.1;
   font-weight: 700;
 }
 
 h2 {
-  font-size: 1.25rem;
+  font-size: calc(1.25rem * var(--font-size-scale));
   font-weight: 700;
   color: var(--primary-color);
-  margin-top: 25px;
-  margin-bottom: 12px;
+  margin-top: var(--section-gap);
+  margin-bottom: var(--item-gap);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.5em; /* Scaled gap */
 }
 
 h2 > i {
@@ -84,12 +121,12 @@ a:hover {
 
 ul {
   list-style: disc;
-  padding-left: 18px;
+  padding-left: 1.5em; /* Scaled Bullet indent */
 }
 
 /* Shared Entry Styles */
 .entry {
-  margin-bottom: 20px;
+  margin-bottom: var(--s-5);
   break-inside: avoid;
 }
 
@@ -97,12 +134,12 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 4px;
+  margin-bottom: var(--s-1);
 }
 
 .entry-left {
   flex: 1;
-  padding-right: 15px;
+  padding-right: var(--s-4);
 }
 
 .entry-right {
@@ -111,7 +148,7 @@ ul {
 }
 
 .entry-title {
-  font-size: 1.1rem;
+  font-size: calc(1.1rem * var(--font-size-scale));
   font-weight: 700;
   color: var(--text-color);
   margin: 0;
@@ -119,10 +156,10 @@ ul {
 }
 
 .entry-subtitle {
-  font-size: 0.95rem;
+  font-size: calc(0.95rem * var(--font-size-scale));
   font-weight: 600;
   color: var(--accent-color);
-  margin-top: 2px;
+  margin-top: calc(2px * var(--spacing-scale));
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -141,7 +178,7 @@ ul {
 
 .entry-date {
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: 0.9em;
   font-weight: 500;
   color: var(--text-color);
   white-space: nowrap;
@@ -152,49 +189,46 @@ ul {
   font-size: 0.85em;
   color: var(--text-light);
   font-weight: 400;
-  margin-top: 2px;
+  margin-top: calc(2px * var(--spacing-scale));
   font-style: italic;
   text-align: right; /* Explicitly requested */
 }
 
 .entry-summary {
-  font-size: 0.95rem;
-  margin-bottom: 6px;
+  font-size: 0.95em;
+  margin-bottom: calc(6px * var(--spacing-scale));
   line-height: 1.5;
   color: #334155;
 }
 
 .entry-highlights {
-  margin-top: 6px;
-  margin-bottom: 8px;
+  margin-top: calc(6px * var(--spacing-scale));
+  margin-bottom: var(--s-2);
 }
 
 .entry-highlights li {
-  margin-bottom: 4px;
+  margin-bottom: var(--s-1);
   line-height: 1.4;
-  font-size: 0.9rem;
+  font-size: 0.9em
   color: #475569;
 }
 
 .entry-tags {
-  margin-top: 8px;
+  margin-top: var(--s-2);
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 0.35em; /* Scale gap with font size */
 }
 
-/* Shared Components */
-/* .company-name styles are now integrated into .entry-subtitle above */
-
-/* Skill Tags - Shared Style */
+/* Item Tags */
 .item-tag {
   display: inline-flex;
   align-items: center;
-  padding: 3px 10px;
-  margin: 0 4px 4px 0;
+  padding: 0.25em 0.8em; /* Scaled padding */
+  margin: 0 0.25em 0.25em 0; /* Scaled margin */
   background-color: #f1f5f9;
   border-radius: 4px;
-  font-size: 0.85em;
+  font-size: calc(0.7rem * var(--font-size-scale));
   color: #334155;
   font-weight: 500;
   border: 1px solid #e2e8f0;
@@ -249,16 +283,6 @@ ul {
   margin-right: 8px;
 }
 
-/* Common Components */
-.avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin: 0 auto 20px auto;
-  display: block;
-  object-fit: cover;
-}
-
 /* Specialized Dot Style Skill Tag */
 .item-tag.rated {
   /* Default flex flow works well vertically centered */
@@ -268,18 +292,18 @@ ul {
 .item-tag.rated::after {
   content: "";
   display: block;
-  width: 4px;
-  height: 4px;
+  width: 0.35em;
+  height: 0.35em;
   border-radius: 50%;
 
   /* Alignment */
-  margin-left: 8px; /* Space between text and first dot */
-  margin-right: 32px; /* Reserve space for the 4 shadow dots */
+  margin-left: 0.7em; /* Space between text and first dot */
+  margin-right: 2.8em; /* Reserve space for the 4 shadow dots */
 
   /* Default: All empty (gray) */
   background-color: #cbd5e0;
-  box-shadow: 8px 0 0 0 #cbd5e0, 16px 0 0 0 #cbd5e0, 24px 0 0 0 #cbd5e0,
-    32px 0 0 0 #cbd5e0;
+  box-shadow: 0.7em 0 0 0 #cbd5e0, 1.4em 0 0 0 #cbd5e0, 2.1em 0 0 0 #cbd5e0,
+    2.8em 0 0 0 #cbd5e0;
 }
 
 /* Rating variants: Color the dots! */
@@ -289,55 +313,108 @@ ul {
 
 .item-tag.rated.rated-2::after {
   background-color: var(--accent-color);
-  box-shadow: 8px 0 0 0 var(--accent-color), 16px 0 0 0 #cbd5e0,
-    24px 0 0 0 #cbd5e0, 32px 0 0 0 #cbd5e0;
+  box-shadow: 0.7em 0 0 0 var(--accent-color), 1.4em 0 0 0 #cbd5e0,
+    2.1em 0 0 0 #cbd5e0, 2.8em 0 0 0 #cbd5e0;
 }
 
 .item-tag.rated.rated-3::after {
   background-color: var(--accent-color);
-  box-shadow: 8px 0 0 0 var(--accent-color), 16px 0 0 0 var(--accent-color),
-    24px 0 0 0 #cbd5e0, 32px 0 0 0 #cbd5e0;
+  box-shadow: 0.7em 0 0 0 var(--accent-color), 1.4em 0 0 0 var(--accent-color),
+    2.1em 0 0 0 #cbd5e0, 2.8em 0 0 0 #cbd5e0;
 }
 
 .item-tag.rated.rated-4::after {
   background-color: var(--accent-color);
-  box-shadow: 8px 0 0 0 var(--accent-color), 16px 0 0 0 var(--accent-color),
-    24px 0 0 0 var(--accent-color), 32px 0 0 0 #cbd5e0;
+  box-shadow: 0.7em 0 0 0 var(--accent-color), 1.4em 0 0 0 var(--accent-color),
+    2.1em 0 0 0 var(--accent-color), 2.8em 0 0 0 #cbd5e0;
 }
 
 .item-tag.rated.rated-5::after {
   background-color: var(--accent-color);
-  box-shadow: 8px 0 0 0 var(--accent-color), 16px 0 0 0 var(--accent-color),
-    24px 0 0 0 var(--accent-color), 32px 0 0 0 var(--accent-color);
+  box-shadow: 0.7em 0 0 0 var(--accent-color), 1.4em 0 0 0 var(--accent-color),
+    2.1em 0 0 0 var(--accent-color), 2.8em 0 0 0 var(--accent-color);
 }
 
 /* Profile Summary */
 .summary {
   line-height: 1.6;
-  margin-bottom: 16px;
+  margin-bottom: var(--s-4);
   color: var(--secondary-color);
-  font-size: 1rem;
+  font-size: calc(1rem * var(--font-size-scale));
 }
 
 /* Item Group Headers */
 .item-group {
-  margin-bottom: 12px;
+  margin-bottom: var(--item-gap);
   break-inside: avoid;
   page-break-inside: avoid;
 }
 
 .item-name {
   font-weight: 700;
-  margin-bottom: 4px;
-  font-size: 0.95rem;
-  color: var(--primary-color);
+  margin-bottom: var(--s-1);
+  font-size: calc(0.95rem * var(--font-size-scale));
+  color: var(--text-color);
   letter-spacing: -0.01em;
   display: block; /* Ensure it behaves like a block */
 }
 
 /* Unified Avatar Style */
 .avatar {
+  width: calc(120px * var(--spacing-scale));
+  height: calc(120px * var(--spacing-scale));
+  border-radius: 50%;
+  display: block;
+  object-fit: cover;
   background-color: #cbd5e0;
   border: 3px solid white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 auto var(--s-5) auto; /* Avatar only uses bottom margin */
+}
+
+/* Utility Classes replacing inline styles */
+.language-fluency {
+  font-size: 0.9em;
+  color: var(--text-light);
+}
+
+.external-link-icon {
+  font-size: 0.8em;
+  margin-left: var(--s-1);
+}
+
+/* Generic Utility Component Classes */
+.language-item {
+  display: block;
+  margin-bottom: var(--s-2);
+}
+
+.divider {
+  border: 0;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: var(--s-5);
+}
+
+.entry-date-accent {
+  color: var(--accent-color);
+}
+
+.education-score {
+  margin-top: calc(2px * var(--spacing-scale));
+  font-style: normal;
+}
+
+.awarder {
+  font-style: italic;
+}
+
+.reference-entry {
+  margin-bottom: var(--s-3);
+  page-break-inside: avoid;
+}
+
+.references-note {
+  color: var(--text-light);
+  font-style: italic;
+  margin-top: var(--s-3);
 }
