@@ -288,52 +288,48 @@ ul {
   /* Default flex flow works well vertically centered */
 }
 
-/* Base Dot (Dot 1) & Positioning */
+/* "Signal Bars" Rating System */
+.item-tag.rated {
+  display: inline-flex;
+  align-items: center;
+  
+  /* Establish colors at the parent level so variants can use them */
+  --bar-off: #cbd5e0;
+  --bar-on: var(--accent-color);
+}
+
 .item-tag.rated::after {
   content: "";
   display: block;
-  width: 0.35em;
-  height: 0.35em;
-  border-radius: 50%;
-
-  /* Alignment */
-  margin-left: 0.7em; /* Space between text and first dot */
-  margin-right: 2.8em; /* Reserve space for the 4 shadow dots */
-
-  /* Default: All empty (gray) */
-  background-color: #cbd5e0;
-  box-shadow: 0.7em 0 0 0 #cbd5e0, 1.4em 0 0 0 #cbd5e0, 2.1em 0 0 0 #cbd5e0,
-    2.8em 0 0 0 #cbd5e0;
+  width: 0.8em;
+  height: 0.8em;
+  margin-left: 0.4em;
+  
+  /* Layout: 3 Vertical Bars using Gradients */
+  background-image: 
+    linear-gradient(to top, var(--c1, var(--bar-off)) 35%, transparent 35%),   /* Bar 1 (Low) */
+    linear-gradient(to top, var(--c2, var(--bar-off)) 65%, transparent 65%),   /* Bar 2 (Mid) */
+    linear-gradient(to top, var(--c3, var(--bar-off)) 100%, transparent 100%); /* Bar 3 (High) */
+  
+  background-size: 25% 100%; /* Each bar is 25% wide */
+  background-position: 0% 100%, 50% 100%, 100% 100%; /* Left, Center, Right align */
+  background-repeat: no-repeat;
 }
 
-/* Rating variants: Color the dots! */
-.item-tag.rated.rated-1::after {
-  background-color: var(--accent-color);
-}
+/* Rating variants: Set the variables to "turn on" the bars */
 
-.item-tag.rated.rated-2::after {
-  background-color: var(--accent-color);
-  box-shadow: 0.7em 0 0 0 var(--accent-color), 1.4em 0 0 0 #cbd5e0,
-    2.1em 0 0 0 #cbd5e0, 2.8em 0 0 0 #cbd5e0;
-}
+/* Level 1: Low bar active */
+.item-tag.rated.rated-1 { --c1: var(--bar-on); }
 
-.item-tag.rated.rated-3::after {
-  background-color: var(--accent-color);
-  box-shadow: 0.7em 0 0 0 var(--accent-color), 1.4em 0 0 0 var(--accent-color),
-    2.1em 0 0 0 #cbd5e0, 2.8em 0 0 0 #cbd5e0;
-}
+/* Level 2: Low + Mid bars active */
+.item-tag.rated.rated-2 { --c1: var(--bar-on); --c2: var(--bar-on); }
 
-.item-tag.rated.rated-4::after {
-  background-color: var(--accent-color);
-  box-shadow: 0.7em 0 0 0 var(--accent-color), 1.4em 0 0 0 var(--accent-color),
-    2.1em 0 0 0 var(--accent-color), 2.8em 0 0 0 #cbd5e0;
-}
+/* Level 3: All bars active */
+.item-tag.rated.rated-3 { --c1: var(--bar-on); --c2: var(--bar-on); --c3: var(--bar-on); }
 
-.item-tag.rated.rated-5::after {
-  background-color: var(--accent-color);
-  box-shadow: 0.7em 0 0 0 var(--accent-color), 1.4em 0 0 0 var(--accent-color),
-    2.1em 0 0 0 var(--accent-color), 2.8em 0 0 0 var(--accent-color);
-}
+/* Fallback for higher values */
+.item-tag.rated.rated-4,
+.item-tag.rated.rated-5 { --c1: var(--bar-on); --c2: var(--bar-on); --c3: var(--bar-on); }
 
 /* Profile Summary */
 .summary {

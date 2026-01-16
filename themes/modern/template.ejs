@@ -84,7 +84,9 @@
                                 <% skillGroup.keywords.forEach(function(keyword) { %>
                                     <% 
                                         var kName = typeof keyword === 'object' ? keyword.name : keyword;
-                                        var kLevel = typeof keyword === 'object' ? keyword.level : 0;
+                                        // Clamp level to max 3
+                                        var rawLevel = typeof keyword === 'object' ? keyword.level : 0;
+                                        var kLevel = Math.min(rawLevel, 3);
                                     %>
                                     
                                     <span class="item-tag <%= kLevel > 0 ? 'rated rated-' + kLevel : '' %>">
