@@ -29,17 +29,12 @@
 .contact-item {
   margin: 0 var(--s-2);
   display: inline-block;
-
+}
 
 /* Print Styles */
 @page {
   margin: 0;
   size: auto;
-}
-
-@media print {
-  body {
-    
 }
 
 .contact-item i {
@@ -51,18 +46,6 @@
 /* Sections */
 .section {
   margin-bottom: var(--section-gap);
-}
-
-/* Classic Dense Grid */
-.dense-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(13em, 1fr));
-  column-gap: var(--s-4);
-  row-gap: var(--s-2);
-}
-
-.dense-grid .item-group {
-    margin-bottom: 0;
 }
 
 /* Print Overrides */

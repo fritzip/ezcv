@@ -44,6 +44,19 @@
                     <img src="<%= resume.basics.image %>" alt="<%= resume.basics.name %>" class="avatar">
                 <% } %>
 
+                <!-- Mobile Only Header (Avatar -> Header -> Rest) -->
+                <header class="mobile-header">
+                    <h1><%= resume.basics.name %></h1>
+                    <div class="profile-label">
+                        <%= resume.basics.label %>
+                    </div>
+                    <% if (resume.basics.summary) { %>
+                        <p class="summary">
+                            <%= resume.basics.summary %>
+                        </p>
+                    <% } %>
+                </header>
+
                 <section>
                     <h2><i class="fas fa-address-card"></i> Contact</h2>
                     
@@ -187,7 +200,7 @@
             <!-- RIGHT COLUMN: Main Content -->
             <main class="main-content">
                 <div class="content-wrapper">
-                <header>
+                <header class="desktop-header">
                     <h1><%= resume.basics.name %></h1>
                     <div class="profile-label">
                         <%= resume.basics.label %>

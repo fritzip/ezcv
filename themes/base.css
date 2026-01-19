@@ -1,5 +1,8 @@
-/* Base Variables & Reset */
+/* =========================================
+   Base Variables & Configuration
+   ========================================= */
 :root {
+  /* Colors */
   --primary-color: #2c3e50;
   --secondary-color: #64748b;
   --accent-color: #3b82f6;
@@ -8,7 +11,7 @@
   --background-color: #e2e8f0;
   --sheet-background: #ffffff;
 
-  /* Dimensions */
+  /* Dimensions (A4) */
   --page-width: 210mm;
   --page-height: 297mm;
 
@@ -18,36 +21,53 @@
   --page-padding-scale: 1;
   --section-gap-scale: 1;
 
-  /* Base Definitions */
-  --base-page-padding: 15mm;
-  --base-section-gap: 25px;
-  --base-font-val: 10pt;
-
-  /* Computed Spacings */
-  /* Page Padding affected by generic spacing scale AND specific padding scale */
-  --page-padding: calc(
-    var(--base-page-padding) * var(--spacing-scale) * var(--page-padding-scale)
-  );
-
-  /* Section Gap affected by generic spacing scale AND specific gap scale */
-  --section-gap: calc(
-    var(--base-section-gap) * var(--spacing-scale) * var(--section-gap-scale)
-  );
-
-  /* Computed Typography */
-  --base-font-size: calc(var(--base-font-val) * var(--font-size-scale));
-
-  /* General Utility Spaces */
-  --s-1: calc(4px * var(--spacing-scale));
-  --s-2: calc(8px * var(--spacing-scale));
-  --s-3: calc(12px * var(--spacing-scale));
-  --s-4: calc(16px * var(--spacing-scale));
-  --s-5: calc(20px * var(--spacing-scale));
-  --s-6: calc(24px * var(--spacing-scale));
-  --s-7: calc(28px * var(--spacing-scale));
-  --s-8: calc(32px * var(--spacing-scale));
+  /* Base Unit Definitions */
+  --base-font-val: 10pt; /* Fallback / Print base */
 }
 
+/* =========================================
+   Responsive Logic (Desktop Scaling)
+   ========================================= */
+@media screen and (min-width: 551px) {
+  :root {
+    /* "Shrink to fit" logic: scales font relative to viewport width */
+    --base-font-val: min(10pt, 1.68vw);
+    font-size: min(16px, 2.02vw);
+  }
+}
+
+/* =========================================
+   Computed Variables
+   ========================================= */
+:root {
+  /* Spacings */
+  /* 4.2 comes from 56px(15mm) / 13.33px(10pt) */
+  --page-padding: calc(
+    4.2 * var(--base-font-val) * var(--spacing-scale) *
+      var(--page-padding-scale)
+  );
+  /* 1.9 comes from 25px / 13.33px */
+  --section-gap: calc(
+    1.9 * var(--base-font-val) * var(--spacing-scale) * var(--section-gap-scale)
+  );
+
+  /* Typography Base */
+  --base-font-size: calc(var(--base-font-val) * var(--font-size-scale));
+
+  /* Spacer Utilities (S1-S8) */
+  --s-1: calc(0.3 * var(--base-font-val) * var(--spacing-scale));
+  --s-2: calc(0.6 * var(--base-font-val) * var(--spacing-scale));
+  --s-3: calc(0.9 * var(--base-font-val) * var(--spacing-scale));
+  --s-4: calc(1.2 * var(--base-font-val) * var(--spacing-scale));
+  --s-5: calc(1.5 * var(--base-font-val) * var(--spacing-scale));
+  --s-6: calc(1.8 * var(--base-font-val) * var(--spacing-scale));
+  --s-7: calc(2.1 * var(--base-font-val) * var(--spacing-scale));
+  --s-8: calc(2.4 * var(--base-font-val) * var(--spacing-scale));
+}
+
+/* =========================================
+   Global Reset & Body
+   ========================================= */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -70,17 +90,63 @@ body {
   -webkit-print-color-adjust: exact;
 }
 
-/* The Paper Sheet */
+/* =========================================
+   The Paper Sheet
+   ========================================= */
 .sheet {
   background: var(--sheet-background);
-  width: var(--page-width);
+  /* Desktop: Scale locally (width 100% of container, max A4 width) */
+  width: 100%;
+  max-width: var(--page-width);
   min-height: var(--page-height);
+
   padding: var(--page-padding);
   box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   position: relative;
   margin: 0 auto;
+}
+
+/* =========================================
+   Mobile Overrides (< 550px)
+   ========================================= */
+@media screen and (max-width: 550px) {
+  body {
+    padding: 0; /* Remove body padding on mobile */
+  }
+
+  .sheet {
+    max-width: none;
+    min-height: 100vh;
+    width: 100% !important; /* Force full width */
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+/* =========================================
+   Print Overrides (A4 Forced)
+   ========================================= */
+@media print {
+  /* Restore base font size for print (vw units don't make sense relative to paper usually) */
+  :root {
+    --base-font-val: 10pt;
+    font-size: 16px; /* Restore standard REM base */
+  }
+
+  .sheet {
+    width: var(--page-width) !important;
+    min-height: var(--page-height) !important;
+    max-width: none !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    /* padding: var(--page-padding) !important; REMOVED: Let themes decide padding (Modern uses 0) */
+    /* Ensure no weird overflow logic affects print paging */
+    overflow: visible !important;
+    aspect-ratio: auto !important;
+  }
 }
 
 /* Typography */
@@ -434,8 +500,9 @@ ul {
 
 /* Unified Avatar Style */
 .avatar {
-  width: calc(120px * var(--spacing-scale));
-  height: calc(120px * var(--spacing-scale));
+  /* 120px / 13.33px ~= 9 */
+  width: calc(9 * var(--base-font-val) * var(--spacing-scale));
+  height: calc(9 * var(--base-font-val) * var(--spacing-scale));
   border-radius: 50%;
   display: block;
   object-fit: cover;

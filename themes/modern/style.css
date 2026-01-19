@@ -1,37 +1,50 @@
 @import url("base.css");
 
-/* Overrides */
+/* =========================================
+   Theme Configuration: Modern
+   ========================================= */
 :root {
   --sidebar-bg: #f8fafc;
   --sidebar-width: 30%;
 }
 
-/* Modern Theme Specific Layout */
+/* =========================================
+   Layout Structure
+   ========================================= */
 .sheet {
-  overflow: hidden;
-  padding: 0;
+  padding: 0; /* Modern theme handles padding internally */
 }
 
+/* Grid Container */
 .resume-container {
   display: grid;
   grid-template-columns: var(--sidebar-width) 1fr;
-  min-height: var(--page-height);
-  height: 100%;
+  min-height: 100%;
 }
 
-/* Sidebar */
+/* Visibility Toggles */
+.mobile-header {
+  display: none;
+}
+.desktop-header {
+  display: block;
+}
+.desktop-header .summary {
+  margin-top: var(--s-4);
+}
+
+/* =========================================
+   Sidebar & Main Content
+   ========================================= */
 .sidebar {
   background-color: var(--sidebar-bg);
-  padding-left: var(--section-gap);
-  padding-right: var(--section-gap);
-  padding-top: 0;
-  padding-bottom: 0;
+  padding: 0 var(--section-gap); /* Horizontal padding only initially */
   border-right: 1px solid #e2e8f0;
   font-size: 0.9em;
 }
 
-/* Main Content */
 .main-content {
+  /* Dynamic padding calculation to balance whitespace */
   padding: 0
     calc(
       var(--section-gap) *
@@ -39,6 +52,7 @@
     );
 }
 
+/* Vertical Padding Wrappers */
 .content-wrapper,
 .sidebar-wrapper {
   padding-top: var(--page-padding);
@@ -48,11 +62,13 @@
 .content-wrapper header {
   margin-bottom: var(--s-8);
 }
-
 .content-wrapper header .summary {
   margin-top: var(--s-4);
 }
 
+/* =========================================
+   Theme Component Overrides
+   ========================================= */
 /* Sidebar Contact Items */
 .contact-item {
   margin-bottom: var(--s-1);
@@ -61,7 +77,6 @@
   gap: var(--s-2);
   font-size: calc(0.9rem * var(--font-size-scale));
   overflow-wrap: anywhere;
-  /* Ensure text wraps properly */
   min-width: 0;
 }
 
@@ -73,7 +88,6 @@
   margin-top: 2px;
 }
 
-/* Profile Label (Modern) */
 .profile-label {
   font-size: calc(1.2rem * var(--font-size-scale));
   color: var(--accent-color);
@@ -81,11 +95,65 @@
   font-weight: 500;
 }
 
-/* Specific modern layout overrides for Shared Entries */
+/* =========================================
+   Mobile Overrides (< 550px)
+   ========================================= */
+@media screen and (max-width: 550px) {
+  .resume-container {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+  }
 
-/* Print Overrides */
+  /* Visibility Swaps */
+  .mobile-header {
+    display: block;
+    text-align: center;
+    margin-bottom: var(--s-4);
+  }
+  .mobile-header .summary {
+    margin-top: var(--s-2);
+    text-align: left;
+  }
+  .desktop-header {
+    display: none;
+  }
+
+  /* Reset Layout */
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: none;
+    padding: var(--section-gap);
+  }
+
+  .main-content {
+    padding: var(--section-gap);
+    background-color: var(--sheet-background);
+  }
+
+  /* Flow Adjustments */
+  .sidebar-wrapper {
+    padding-bottom: 0;
+  }
+  .content-wrapper {
+    padding-top: 0;
+  }
+  .content-wrapper > .divider {
+    display: none;
+  }
+
+  /* Grid Adjustments */
+  .sidebar .item-group > div:not(.item-name):not(.item-detail) {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+}
+
+/* =========================================
+   Print Overrides (Full Page Backgrounds)
+   ========================================= */
 @media print {
-  /* Use fixed positioning to create a repeating sidebar background on every page */
+  /* Fixed sidebar background simulation for multi-page support */
   body::before {
     content: "";
     position: fixed;
@@ -93,7 +161,7 @@
     left: 0;
     bottom: 0;
     width: 30%; /* Matches --sidebar-width */
-    background-color: #f8fafc; /* Matches --sidebar-bg */
+    background-color: #f8fafc;
     border-right: 1px solid #e2e8f0;
     z-index: -1;
     -webkit-print-color-adjust: exact;
@@ -117,7 +185,7 @@
     overflow: visible;
     background: transparent !important;
     position: relative;
-    z-index: 1; /* Ensure content sits above the fixed background */
+    z-index: 1;
   }
 
   .sidebar {
