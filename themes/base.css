@@ -196,7 +196,7 @@ ul {
 }
 
 .entry-summary {
-  font-size: 0.95em;
+  font-size: 1em;
   margin-bottom: calc(6px * var(--spacing-scale));
   line-height: 1.5;
   color: #334155;
@@ -215,27 +215,24 @@ ul {
 }
 
 .entry-tags {
-  margin-top: var(--s-2);
+  margin-top: var(--s-1);
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35em; /* Scale gap with font size */
+  gap: var(--s-1);
 }
 
 /* Item Tags */
 .item-tag {
   display: inline-flex;
   align-items: center;
-  padding: 0.25em 0.8em; /* Scaled padding */
-  margin: 0 0.25em 0.25em 0; /* Scaled margin */
-
+  padding: 0.15em 0.7em;
   box-sizing: border-box;
   background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
   border-radius: 15px;
   font-size: calc(0.7rem * var(--font-size-scale));
   color: var(--text-color);
   font-weight: 500;
-  border: 1px solid #e2e8f0;
   vertical-align: middle;
 }
 
@@ -300,10 +297,9 @@ ul {
   gap: var(--s-1);
 }
 
-
 /* Rated Tags (Signal Bars CSS-only implementation) */
 .item-tag.rated {
-  padding-right: 28px; /* Space for the bars */
+  padding-right: 2.2em; /* Space for the bars */
   position: relative;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
@@ -312,13 +308,13 @@ ul {
 .item-tag.rated::after {
   content: "";
   position: absolute;
-  right: 8px;
+  right: 0.6em;
   top: 50%;
   transform: translateY(-50%);
-  width: 14px;
-  height: 10px;
+  width: 1.05em;
+  height: 0.75em;
   display: block;
-  
+
   /* 
      3 bars. 
      Bar 1: Leftmost. Height 40%.
@@ -327,43 +323,97 @@ ul {
   */
   background-image: 
       /* Bar 1 */
-      linear-gradient(to top, var(--bar-color-1, #cbd5e0) 0%, var(--bar-color-1, #cbd5e0) 100%),
-      /* Bar 2 */
-      linear-gradient(to top, var(--bar-color-2, #cbd5e0) 0%, var(--bar-color-2, #cbd5e0) 100%),
-      /* Bar 3 */
-      linear-gradient(to top, var(--bar-color-3, #cbd5e0) 0%, var(--bar-color-3, #cbd5e0) 100%);
-      
-  background-size: 3px 40%, 3px 70%, 3px 100%;
-  background-position: 0 100%, 5px 100%, 10px 100%; /* Bottom aligned. X offsets with gaps */
+    linear-gradient(
+      to top,
+      var(--bar-color-1, #cbd5e0) 0%,
+      var(--bar-color-1, #cbd5e0) 100%
+    ),
+    /* Bar 2 */
+    linear-gradient(
+        to top,
+        var(--bar-color-2, #cbd5e0) 0%,
+        var(--bar-color-2, #cbd5e0) 100%
+      ),
+    /* Bar 3 */
+    linear-gradient(
+        to top,
+        var(--bar-color-3, #cbd5e0) 0%,
+        var(--bar-color-3, #cbd5e0) 100%
+      );
+
+  background-size:
+    0.25em 40%,
+    0.25em 70%,
+    0.25em 100%;
+  background-position:
+    0 100%,
+    0.4em 100%,
+    0.8em 100%; /* Bottom aligned. X offsets with gaps */
   background-repeat: no-repeat;
 }
 
 /* Level 1: Bar 1 active */
-.item-tag.rated-1 { --bar-color-1: var(--accent-color); }
+.item-tag.rated-1 {
+  --bar-color-1: var(--accent-color);
+}
 
 /* Level 2: Bar 1, 2 active */
-.item-tag.rated-2 { 
-  --bar-color-1: var(--accent-color); 
-  --bar-color-2: var(--accent-color); 
+.item-tag.rated-2 {
+  --bar-color-1: var(--accent-color);
+  --bar-color-2: var(--accent-color);
 }
 
 /* Level 3: All active */
-.item-tag.rated-3 { 
-  --bar-color-1: var(--accent-color); 
-  --bar-color-2: var(--accent-color); 
-  --bar-color-3: var(--accent-color); 
+.item-tag.rated-3 {
+  --bar-color-1: var(--accent-color);
+  --bar-color-2: var(--accent-color);
+  --bar-color-3: var(--accent-color);
 }
 
 /* Sidebar placement tweak (from Modern style override, moved here for robustness) */
 /* .item-tag.rated .signal-bars removed as we use ::after now */
 
+/* --------------------------------------------------------- */
+/* Generic Layout Components (Reusable across themes)        */
+/* --------------------------------------------------------- */
+
+/* Item Spread: Row layout with space between (e.g. Language Name .... Level) */
+.item-spread {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.item-spread .item-name {
+  margin-bottom: 0;
+}
+
+/* Compact Grid: For dense lists of items (e.g. Skills, Interests) */
+.compact-grid {
+  display: grid;
+  /* Auto-fit columns: At least 90px wide (good for Sidebar), expand to fill (Main content) */
+  /* This ensures 2 columns in sidebar (~180px) and mult-col in main body */
+  grid-template-columns: repeat(auto-fill, minmax(15ch, 1fr));
+  gap: var(--s-1);
+  width: 100%;
+  margin-top: var(--s-1);
+}
+
+.compact-grid .item-tag {
+  margin: 0; /* Let grid gap handle spacing */
+  width: 100%; /* Fill the grid cell */
+}
+
+/* --------------------------------------------------------- */
 
 /* Profile Summary */
 .summary {
   line-height: 1.6;
   margin-bottom: var(--s-4);
   color: var(--secondary-color);
-  font-size: calc(1rem * var(--font-size-scale));
+  font-size: 1.1em;
 }
 
 /* Item Group Headers */

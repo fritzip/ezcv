@@ -81,7 +81,7 @@
                             <div class="item-name">
                                 <span><%= skillGroup.name %></span>
                             </div>
-                            <div>
+                            <div class="compact-grid">
                                 <% skillGroup.keywords.forEach(function(keyword) { %>
                                     <% 
                                         var kName = typeof keyword === 'object' ? keyword.name : keyword;
@@ -128,7 +128,7 @@
                     <h2><i class="fas fa-language"></i> Languages</h2>
                     
                         <% resume.languages.forEach(function(lang) { %>
-                            <div class="item-group">
+                            <div class="item-group item-spread">
                                 <span class="item-name"><%= lang.language %></span>
                                 <span class="item-detail"><%= lang.fluency %></span>
                             </div>
@@ -148,7 +148,7 @@
                             <div class="item-group">
                                 <div class="item-name"><%= interest.name %></div>
                                 <% if (interest.keywords && interest.keywords.length) { %>
-                                <div class="tags-container">
+                                <div class="tags-container compact-grid">
                                     <% interest.keywords.forEach(function(keyword) { %>
                                         <% 
                                             var kName = typeof keyword === 'object' ? keyword.name : keyword;
@@ -164,7 +164,7 @@
                         <% }); %>
                     <% } else { %>
                          <div class="item-group"> <!-- Wrap in item-group for grid styling -->
-                            <div class="tags-container">
+                            <div class="tags-container compact-grid">
                                 <% resume.interests.forEach(function(interest) { %>
                                     <% 
                                         var name = typeof interest === 'object' ? interest.name : interest;

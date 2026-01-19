@@ -32,10 +32,11 @@
 
 /* Main Content */
 .main-content {
-  padding-right: var(--page-padding);
-  padding-left: var(--section-gap);
-  padding-top: 0;
-  padding-bottom: 0;
+  padding: 0
+    calc(
+      var(--section-gap) *
+        ((100% - var(--sidebar-width)) / var(--sidebar-width) * 0.3 + 1)
+    );
 }
 
 .content-wrapper,
@@ -65,7 +66,6 @@
 }
 
 .contact-icon {
-  width: var(--s-5);
   text-align: center;
   color: var(--accent-color);
   font-size: 1.1em;
