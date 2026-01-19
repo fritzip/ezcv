@@ -11,6 +11,7 @@ style:
   spacingScale: 1.0 # Global density scaler
   pagePaddingScale: 1.0 # Specific multiplier for page margins
   sectionGapScale: 1.0 # Specific multiplier for section separation
+  sidebarWidth: "30%" # Width of the sidebar (e.g. 30%, 250px)
 
 # Toggles
 features:
@@ -18,3 +19,5 @@ features:
   showIcons: true
   showSkillBars: true
   showLocation: true
+  showReferences: false # If false, shows "References available upon request"
+
