@@ -1,17 +1,81 @@
+#!/usr/bin/env node
 const fs = require("fs");
 const path = require("path");
 const yaml = require("js-yaml");
 const ejs = require("ejs");
 
+// Handle init command
+if (process.argv[2] === "init") {
+  console.log("🚀 Initializing new webcv project...");
+
+  const filesToCopy = [
+    { src: "resume.yaml", dest: "resume.yaml" },
+    { src: "config.yaml", dest: "config.yaml" },
+    { src: ".gitignore", dest: ".gitignore" },
+  ];
+
+  let createdCount = 0;
+
+  filesToCopy.forEach(({ src, dest }) => {
+    const srcPath = path.join(__dirname, src);
+    const destPath = path.join(process.cwd(), dest);
+
+    if (fs.existsSync(destPath)) {
+      console.warn(`⚠️  skipped: ${dest} already exists.`);
+    } else {
+      try {
+        fs.copyFileSync(srcPath, destPath);
+        console.log(`✅ created: ${dest}`);
+        createdCount++;
+      } catch (err) {
+        console.error(`❌ error creating ${dest}:`, err.message);
+      }
+    }
+  });
+
+  // Create GitHub Action Workflow
+  const workflowsDir = path.join(process.cwd(), ".github", "workflows");
+  const workflowDest = path.join(workflowsDir, "deploy.yml");
+  const workflowSrc = path.join(__dirname, "templates", "deploy.yml");
+
+  if (!fs.existsSync(workflowsDir)) {
+    fs.mkdirSync(workflowsDir, { recursive: true });
+  }
+
+  if (fs.existsSync(workflowDest)) {
+    console.warn(`⚠️  skipped: .github/workflows/deploy.yml already exists.`);
+  } else {
+    try {
+      fs.copyFileSync(workflowSrc, workflowDest);
+      console.log(`✅ created: .github/workflows/deploy.yml`);
+      createdCount++;
+    } catch (err) {
+      console.error(`❌ error creating workflow file:`, err.message);
+    }
+  }
+
+  console.log(`\n🎉 Initialization complete! (${createdCount} files created)`);
+  console.log(`\nNext steps:`);
+  console.log(`1. Edit 'resume.yaml' with your details.`);
+  console.log(`2. Commit and push your changes.`);
+  console.log(
+    `3. Go to your repository settings on GitHub -> Pages -> Build and deployment -> Source -> GitHub Actions.`,
+  );
+  console.log(`4. Watch the Action tab for your deployment!`);
+
+  process.exit(0);
+}
+
 // Paths
 // Allow passing an input file or default to resume.yaml
 const inputFileArg = process.argv[2];
+// Use process.cwd() to look for files in the user's current directory
 const DATA_FILE = inputFileArg
   ? path.resolve(inputFileArg)
-  : path.join(__dirname, "resume.yaml");
+  : path.join(process.cwd(), "resume.yaml");
 
-const CONFIG_FILE = path.join(__dirname, "config.yaml");
-const OUTPUT_DIR = path.join(__dirname, "public");
+const CONFIG_FILE = path.join(process.cwd(), "config.yaml");
+const OUTPUT_DIR = path.join(process.cwd(), "public");
 const OUTPUT_HTML = path.join(OUTPUT_DIR, "index.html");
 const OUTPUT_CSS = path.join(OUTPUT_DIR, "style.css");
 

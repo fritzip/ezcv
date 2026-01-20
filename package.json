@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Static CV generator with PDF support",
   "main": "build.js",
+  "bin": {
+    "webcv": "./build.js"
+  },
   "scripts": {
     "build": "node build.js",
     "serve": "npx serve public"
