@@ -11,7 +11,7 @@ if (process.argv[2] === "init") {
   const filesToCopy = [
     { src: "resume.yaml", dest: "resume.yaml" },
     { src: "config.yaml", dest: "config.yaml" },
-    { src: ".gitignore", dest: ".gitignore" },
+    { src: "templates/gitignore", dest: ".gitignore" },
   ];
 
   let createdCount = 0;
