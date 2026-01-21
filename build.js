@@ -58,31 +58,19 @@ if (process.argv[2] === "init") {
     let createdCount = 0;
 
     const filesToManage = [
-      {
-        src: "resume.yaml",
-        dest: "resume.yaml",
-        id: "config_resume",
-      },
-      {
-        src: "config.yaml",
-        dest: "config.yaml",
-        id: "config_main",
-      },
-      {
-        src: "templates/gitignore",
-        dest: ".gitignore",
-        id: "config_gitignore",
-      },
-      {
-        src: "templates/deploy.yml",
-        dest: ".github/workflows/deploy.yml",
-        id: "config_deploy",
-      },
+      "resume.yaml",
+      "config.yaml",
+      ".gitignore",
+      ".github/workflows/deploy.yml",
     ];
 
-    for (const file of filesToManage) {
-      const srcPath = path.join(__dirname, file.src);
-      const destPath = path.join(process.cwd(), file.dest);
+    for (const fileName of filesToManage) {
+      const srcPath = path.join(__dirname, fileName);
+      const destPath = path.join(process.cwd(), fileName);
+
+      // Skip if running in the source repo
+      if (srcPath === destPath) continue;
+
       const destDir = path.dirname(destPath);
 
       if (!fs.existsSync(destDir)) {
@@ -91,15 +79,15 @@ if (process.argv[2] === "init") {
 
       const currentSrcHash = calculateHash(srcPath);
       const userDestHash = calculateHash(destPath);
-      const lastSrcHash = state[file.id];
+      const lastSrcHash = state[fileName];
 
       // New record for state
-      newState[file.id] = currentSrcHash;
+      newState[fileName] = currentSrcHash;
 
       // Case 1: File does not exist in user repo
       if (!fs.existsSync(destPath)) {
         fs.copyFileSync(srcPath, destPath);
-        console.log(`✅ created: ${file.dest}`);
+        console.log(`✅ created: ${fileName}`);
         createdCount++;
         continue;
       }
@@ -107,7 +95,7 @@ if (process.argv[2] === "init") {
       // Case 2: File exists. Check if it differs from current template
       if (userDestHash === currentSrcHash) {
         // Already up to date
-        // console.log(`   ${file.dest} is up to date.`);
+        // console.log(`   ${fileName} is up to date.`);
         continue;
       }
 
@@ -117,7 +105,7 @@ if (process.argv[2] === "init") {
 
       if (templateChanged) {
         // Template changed AND user file is different (conflict or update needed)
-        console.log(`\n⚠️  Update available for ${file.dest}.`);
+        console.log(`\n⚠️  Update available for ${fileName}.`);
         console.log(`   (The template has changed in the new version)`);
 
         const answer = await askQuestion(
@@ -129,17 +117,17 @@ if (process.argv[2] === "init") {
           fs.copyFileSync(destPath, backupPath);
           fs.copyFileSync(srcPath, destPath);
           console.log(
-            `✅ updated: ${file.dest} (backup: ${path.basename(backupPath)})`,
+            `✅ updated: ${fileName} (backup: ${path.basename(backupPath)})`,
           );
           createdCount++;
         } else {
-          console.log(`   skipped: ${file.dest} (kept local version)`);
+          console.log(`   skipped: ${fileName} (kept local version)`);
         }
       } else {
         // Template hasn't changed, but user file is different.
         // User just has local modifications. Don't bother them.
         console.log(
-          `   skipped: ${file.dest} (local modifications, no upstream change)`,
+          `   skipped: ${fileName} (local modifications, no upstream change)`,
         );
       }
     }
@@ -231,7 +219,7 @@ if (process.argv[2] === "init") {
 
           const destPath = path.join(OUTPUT_DIR, fileName);
           fs.copyFileSync(srcPath, destPath);
-          console.log(`   Copied asset: ${fileName}`);
+          console.log(`✅ Copied asset: ${assetPath} -> public/${fileName}`);
           return fileName;
         } else {
           console.warn(`⚠️  Asset not found: ${assetPath}`);
