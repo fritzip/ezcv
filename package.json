@@ -1,10 +1,10 @@
 {
-  "name": "static-web-cv",
+  "name": "breezy-cv",
   "version": "1.0.0",
   "description": "Static CV generator with PDF support",
   "main": "build.js",
   "bin": {
-    "webcv": "./build.js"
+    "breezy-cv": "./build.js"
   },
   "scripts": {
     "build": "node build.js",

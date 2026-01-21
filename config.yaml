@@ -1,5 +1,9 @@
 theme: "modern"
 
+# Optional overrides for avatar and favicon
+favicon: "img/favicon.svg"
+avatar: "img/favicon.svg"
+
 # Visual overrides that themes can use
 style:
   primaryColor: "#1e3a8a" # Deep Blue

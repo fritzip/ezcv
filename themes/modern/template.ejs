@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= resume.basics.name %> - Resume</title>
+    <% if (config.favicon) { %>
+    <link rel="icon" href="<%= config.favicon %>">
+    <% } %>
     <!-- Use Configured Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,8 +43,9 @@
             <!-- LEFT COLUMN: Sidebar -->
             <aside class="sidebar">
                 <div class="sidebar-wrapper">
-                <% if (config.features.showPhoto && resume.basics.image) { %>
-                    <img src="<%= resume.basics.image %>" alt="<%= resume.basics.name %>" class="avatar">
+                <% var avatarUrl = config.avatar || resume.basics.image; %>
+                <% if (config.features.showPhoto && avatarUrl) { %>
+                    <img src="<%= avatarUrl %>" alt="<%= resume.basics.name %>" class="avatar">
                 <% } %>
 
                 <!-- Mobile Only Header (Avatar -> Header -> Rest) -->

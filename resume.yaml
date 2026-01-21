@@ -23,32 +23,32 @@ basics:
 skills:
   - name: "Frontend"
     keywords:
-      - name: "React / Next.js"
-        level: 5
-      - name: "TypeScript"
-        level: 5
-      - name: "Tailwind CSS"
-        level: 4
-      - name: "WebAssembly"
+      - name: "Next.js"
         level: 3
+      - name: "TypeScript"
+        level: 3
+      - name: "Tailwind CSS"
+        level: 2
+      - name: "WebAssembly"
+        level: 1
   - name: "Backend"
     keywords:
       - name: "Node.js"
-        level: 5
-      - name: "Python (FastAPI)"
-        level: 4
+        level: 3
+      - name: "FastAPI"
+        level: 2
       - name: "PostgreSQL"
-        level: 4
+        level: 2
       - name: "GraphQL"
-        level: 4
+        level: 2
   - name: "DevOps"
     keywords:
       - name: "AWS"
-        level: 4
-      - name: "Docker/K8s"
-        level: 3
+        level: 2
+      - name: "Docker"
+        level: 1
       - name: "Terraform"
-        level: 3
+        level: 1
 
 work:
   - name: "Global Tech Solutions"
@@ -137,8 +137,11 @@ languages:
 
 interests:
   - name: "Open Source"
+    icon: "fas fa-code-branch"
   - name: "Hiking"
+    icon: "fas fa-hiking"
   - name: "Photography"
+    icon: "fas fa-camera"
 
 publications:
   - name: "Microservices Patterns in Practice"

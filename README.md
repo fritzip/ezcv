@@ -1,6 +1,6 @@
-# WebCV Engine
+# Breezy CV
 
-This is the engine for generating a static HTML CV from a YAML file. It is designed to be installed as a dependency in your private CV data repository.
+This is the engine for generating a static HTML CV from a YAML file. It is designed to be installed as a dependency in your personal CV data repository.
 
 ## Usage in a Private Repository
 
@@ -8,14 +8,12 @@ This is the engine for generating a static HTML CV from a YAML file. It is desig
 2.  **Initialize npm** and install this tool:
     ```bash
     npm init -y
-    # Replace 'user/repo' with the path to this engine repo
-    # e.g. npm install github:myusername/webcv
-    npm install github:your-username/webcv-engine
+    npm install github:fritzip/breezy-cv
     ```
 3.  **Initialize the project**:
 
     ```bash
-    npx webcv init
+    npx breezy-cv init
     ```
 
     This will:
